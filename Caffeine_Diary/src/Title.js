@@ -5,7 +5,7 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
-const App = () => {
+const Title = () => {
  return (
     <View style={styles.container}>
     <Image style={styles.image}
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default App;
+export default Title;
