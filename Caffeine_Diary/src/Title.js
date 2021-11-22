@@ -5,10 +5,11 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
+import { basicColor,themeColor } from './colors'
 const Title = () => {
  return (
     <View style={styles.container}>
-    <Image style={styles.image}
+    <Image style={styles.image} //icon image
         source={require('./../assets/coffee.png')}
     />
     <Text style={styles.text}>Caffeine Diary</Text>
@@ -18,7 +19,7 @@ const Title = () => {
 const styles = StyleSheet.create({
     container:{
       flex: 1,
-      backgroundColor: '#FFE4C3',
+      backgroundColor: themeColor.Orange.light,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
         padding: 20,
         fontSize: 50,
         fontWeight: '700',
-        color: 'black',
+        color: basicColor.text,
     },
     image:{
       width: '60%',
