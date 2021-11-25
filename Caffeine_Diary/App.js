@@ -1,3 +1,3 @@
-import Title from './src/Title';
+import AppMain from './src/AppMain';
 
-export default Title;
+export default AppMain;

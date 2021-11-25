@@ -1,21 +1,16 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    Image
-} from 'react-native';
-import { basicColor,themeColor } from './colors'
+import {View, Text, StyleSheet, Image} from 'react-native';
+import {basicColor,themeColor} from './colors'
 const Title = () => {
  return (
     <View style={styles.container}>
     <Image style={styles.image} //icon image
-        source={require('./../assets/coffee.png')}
-    />
+        source={require('./../assets/coffee.png')} />
     <Text style={styles.text}>Caffeine Diary</Text>
     </View>
  );
 };
+
 const styles = StyleSheet.create({
     container:{
       flex: 1,
