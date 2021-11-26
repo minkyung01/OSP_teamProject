@@ -27,6 +27,9 @@ export const SubContents = () => {
             <View style={styles.uc_box}>
                 <IconButton type={iconImages.uc_box} />
             </View>
+            <View style={styles.edit}>
+                <IconButton type={iconImages.edit} />
+            </View>
         </View>
     );
 };
@@ -65,7 +68,7 @@ export const MainContents = () => {
                 ))}
             </ScrollView>
             <View>
-                <Text style={styles.edit}>edit</Text>
+                <Text style={styles.add}>+ ADD</Text>
             </View>
         </View>
     );
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
     },
     select: {
         marginTop: 17,
-        marginLeft: 113,
+        marginLeft: 70,
         fontWeight: '500',
     },
     uc_box: {
@@ -143,17 +146,21 @@ const styles = StyleSheet.create({
     selected: {
         color: basicColor.text,
     },
-    edit: {
+    add: {
         width: 100,
         height: 40,
         backgroundColor: themeColor.Orange.dark,
         color: basicColor.background,
         marginLeft: '39%',
         marginBottom: 20,
-        paddingLeft: 27,
+        paddingLeft: 15,
         paddingTop: 3,
         fontSize: 25,
         fontWeight: '700',
         borderRadius: 10,
-    }
+    },
+    edit: {
+        marginLeft: 10,
+        marginTop: 15,
+    },
 });
