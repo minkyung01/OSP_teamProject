@@ -1,14 +1,14 @@
 import React, {useContext} from 'react';
-import {Text, StyleSheet, Image, SafeAreaView, input, label} from 'react-native';
+import {Text, StyleSheet, Image, SafeAreaView, ScrollView, input, label} from 'react-native';
 import {basicColor,themeColor} from './colors';
 import TextButton from './components/TextButton';
 import SortButton from './components/SortButton';
-import {images} from './images';
-import {LevelName, Attendance, ID, SkinColor} from './Info';
+import {LevelName, Attendance, ID, SkinColor,CheckSticker} from './Info';
+import {levelImages} from './images';
 
 const MyPage = () => {
     return(
-        <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.container}>
            <TextButton text="Log Out" />
            <SafeAreaView style={styles.box1}>
             <Text style={styles.info}>{ID}</Text>
@@ -30,9 +30,9 @@ const MyPage = () => {
             })()} //icon image
 
             source={(()=>{
-                if(Attendance<21) return require('./../assets/water.png');
-                else if(Attendance<60) return require('./../assets/coffeeBean.png');
-                else return require('./../assets/coffee.png');
+                if(Attendance<21) return levelImages.Water;
+                else if(Attendance<60) return levelImages.CoffeeBean;
+                else return levelImages.Americano;
             })()}/>
             <SafeAreaView style={styles.box2}>
                 <Text style={styles.title}>You are</Text>
@@ -49,6 +49,12 @@ const MyPage = () => {
                     <Text style={styles.title}>of {LevelName} level</Text>
                     <TextButton text="more" />
                 </SafeAreaView>
+                <SafeAreaView style={styles.box1}>
+                    <SafeAreaView style={{backgroundColor:styles.info.color,
+                                        width:80,height:80, margin:10}}>
+                    </SafeAreaView>
+                    <Image source={CheckSticker} style={{width:60,height:60,margin:10}} />
+                </SafeAreaView>
            </SafeAreaView>
 
            <SafeAreaView style={{marginTop: 30}}>
@@ -64,7 +70,7 @@ const MyPage = () => {
            </SafeAreaView>
            <SortButton text="show the closest due date first" method="closest"/>
            <SortButton text="show the latest added date first" method="latest"/>
-        </SafeAreaView>
+        </ScrollView>
     );
 };
 
@@ -75,7 +81,6 @@ const styles = StyleSheet.create({
       marginTop:20,
       backgroundColor: basicColor.background,
       flexDirection: 'column',
-      alignItems:'flex-start',
     },
     /*align sideways*/
     box1:{

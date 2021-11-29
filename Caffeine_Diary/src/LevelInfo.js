@@ -1,12 +1,12 @@
 import React from 'react';
 import {ScrollView,SafeAreaView, View,Text, StyleSheet, Image,Pressable} from 'react-native';
-import {images} from './images';
+import {iconImages, levelImages} from './images';
 
 const LevelInfo = () => {
     return(
         <ScrollView style={styles.container}>
             <Pressable style={{marginLeft:'auto'}} onPress={()=>alert('back to My Page')}>
-                <Image style={styles.backIMG} source={images.backArrow} />
+                <Image style={styles.backIMG} source={iconImages.backArrow} />
             </Pressable>
             <View style={{alignItems:'center'}}>
                 <Text style={styles.title}>TO-DO-LIST</Text>
@@ -15,7 +15,7 @@ const LevelInfo = () => {
 
             <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#482800',width:'100%',paddingTop:20,paddingBottom:20}}>
                 <Image style={styles.CoffeeIMG}
-                        source={require('./../assets/coffee.png')}/>
+                        source={levelImages.Americano}/>
                 <SafeAreaView style={styles.content}>
                     <Text style={{fontSize:23,fontWeight:'700',color:'#FFFFFF'}}>AMERICANO LEVEL</Text>
                     <Text style={{fontSize:18,fontWeight:'700',color:'#FFFFFF'}}>: attended more than 2 months</Text>
@@ -26,7 +26,7 @@ const LevelInfo = () => {
 
             <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#864B03',width:'100%',marginTop:10,paddingTop:20,paddingBottom:20}}>
                 <Image style={styles.BeanIMG}
-                         source={require('./../assets/coffeeBean.png')}/>
+                         source={levelImages.CoffeeBean}/>
                 <SafeAreaView style={styles.content}>
                      <Text style={{fontSize:23,fontWeight:'700',color:'#FFFFFF'}}>COFFEE-BEAN LEVEL</Text>
                      <Text style={{fontSize:18,fontWeight:'700',color:'#FFFFFF'}}>: attended more than 3 weeks but less than 2 months</Text>
@@ -37,7 +37,7 @@ const LevelInfo = () => {
 
             <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#C9893B',width:'100%',marginTop:10,paddingTop:20,paddingBottom:20}}>
                 <Image style={styles.WaterIMG}
-                          source={require('./../assets/water.png')}/>
+                          source={levelImages.Water}/>
                 <SafeAreaView style={styles.content}>
                       <Text style={{fontSize:23,fontWeight:'700',color:'#FFFFFF'}}>WATER LEVEL</Text>
                       <Text style={{fontSize:18,fontWeight:'700',color:'#FFFFFF'}}>: attended less than 3 weeks</Text>
@@ -73,21 +73,16 @@ const styles = StyleSheet.create({
     },
 
     WaterIMG:{
-        marginRight: 10,
-        marginBottom: 8,
         width: '25%',
         height: '60%',
     },
     BeanIMG:{
-        margin: 7,
+        margin: 12,
         width: '20%',
-        height: '30%',
+        height: '40%',
     },
     CoffeeIMG:{
-        marginLeft: 10,
-        marginRight: 10,
-        marginBottom: 8,
-        width: '20%',
+        width: '27%',
         height: '60%',
     },
 })

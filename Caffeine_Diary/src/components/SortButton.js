@@ -2,13 +2,13 @@ import React, {useContext} from 'react';
 import {Pressable, StyleSheet, View, Image, Text} from 'react-native';
 import {basicColor} from '../colors';
 import PropTypes from 'prop-types';
-import {images} from '../images';
+import {iconImages} from '../images';
 import {Sort} from '../Info';
 /* button to select the sort method*/
 const SortButton = ({text, method})=>{
     return(
         <Pressable style={iconStyle.container}>
-            <CheckButton type={(Sort===method)?images.completed:images.uncompleted} />
+            <CheckButton type={(Sort===method)?iconImages.completed:iconImages.uncompleted} />
             <Text style={iconStyle.contents}>{text}</Text>
         </Pressable>
     );
@@ -26,7 +26,7 @@ const CheckButton = ({type})=>{
     );
 };
 CheckButton.propTypes = {
-    type: PropTypes.oneOf(Object.values(images)).isRequired, /*image(checked or unchecked)*/
+    type: PropTypes.oneOf(Object.values(iconImages)).isRequired, /*image(checked or unchecked)*/
 };
 const iconStyle= StyleSheet.create({
     container:{
