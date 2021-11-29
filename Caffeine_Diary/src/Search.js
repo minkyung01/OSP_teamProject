@@ -1,14 +1,12 @@
 import React from 'react';
 import {SafeAreaView, View,Text, StyleSheet, Image, TextInput} from 'react-native';
 import {basicColor} from './colors'
+import Title from './components/Title';
 
 const Search = () => {
     return(
         <SafeAreaView style={styles.container}>
-            <SafeAreaView style={{flexDirection:'row',alignItems:'center',margin:10}}>
-                <Image style={styles.coffee} source={require('./../assets/coffee.png')} />
-                <Text style={styles.title}>TO-DO-LIST</Text>
-            </SafeAreaView>
+            <Title />
             <TextInput style={styles.searchBar}
                 placeholder="Search a task">
             </TextInput>
@@ -35,8 +33,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     coffee: {
-        marginLeft: 10,
-        marginRight: 10,
         marginBottom: 8,
         width: 60,
         height: 90,
