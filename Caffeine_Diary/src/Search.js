@@ -1,19 +1,16 @@
 import React from 'react';
-import {SafeAreaView, View,Text, StyleSheet, Image} from 'react-native';
+import {SafeAreaView, View,Text, StyleSheet, Image, TextInput} from 'react-native';
+import {basicColor} from './colors'
+import Title from './components/Title';
 
 const Search = () => {
     return(
         <SafeAreaView style={styles.container}>
-            
-            <Image style={styles.coffee} source={require('./../assets/coffee.png')} />
-
-            <Text style={styles.title}>TO-DO-LIST</Text>
-            <Text style={styles.searchBar}>
-                placeholder="Search a task"
-            </Text>
-
-            <Text>search result: 1</Text>
-            
+            <Title />
+            <TextInput style={styles.searchBar}
+                placeholder="Search a task">
+            </TextInput>
+            <Text style={styles.text}>search result: 1</Text>
             <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#FFE4C3',width:'100%',marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
                      <Text style={styles.result}>Buying milk</Text>
@@ -28,7 +25,7 @@ const Search = () => {
 const styles = StyleSheet.create({
     container: {
         alignItems:'center',
-        padding: 10,
+        padding: 20,
     },
     content: {
         margin: 10,
@@ -36,22 +33,29 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     coffee: {
-        marginLeft: 10,
-        marginRight: 10,
         marginBottom: 8,
-        width: '20%',
-        height: '60%',
+        width: 60,
+        height: 90,
     },
     title: {
         alignItems: 'center',
-        color: '#000000',
-        fontSize: 40,
+        color: basicColor.text,
+        fontSize: 50,
+        fontWeight: '700',
+    },
+    text: {
+        alignItems:'center',
+        paddingTop: 50,
+        color: basicColor.text,
+        fontSize: 20,
         fontWeight: '700',
     },
     searchBar: {
         backgroundColor: '#FF991C',
         color: '#FFFFFF',
         fontSize: 18,
+        width:'100%',
+        padding: 10,
         fontWeight:'700',
     },
     result: {
