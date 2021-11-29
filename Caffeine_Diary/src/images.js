@@ -9,11 +9,19 @@ import coffeeBean from '../assets/coffeeBean.png';
 import WaterIcon from '../assets/water.png';
 import BeanIcon from '../assets/coffeeBean.png';
 import AmericanoIcon from '../assets/coffee.png';
+import Share from '../assets/shared.png';
+import Up from '../assets/up.png';
+import Down from '../assets/down.png';
+import Edit from '../assets/edit.png';
 
 export const iconImages = {
     uncompleted: UncheckedBox,
     completed: CheckedBox,
     backArrow: BackArrow,
+    share: Share,
+    up: Up,
+    down: Down,
+    edit: Edit,
 };
 export const levelImages = {
     Water: WaterIcon,

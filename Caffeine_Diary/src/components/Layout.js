@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 import { basicColor, themeColor } from "../colors";
-import { iconImages } from '../iconImage';
+import { iconImages } from '../../src/images';
 import IconButton from './IconButton';
 
 import Category from "./Category";
@@ -25,7 +25,7 @@ export const SubContents = () => {
             </View>
             <Text style={styles.select}>select all</Text>
             <View style={styles.uc_box}>
-                <IconButton type={iconImages.uc_box} />
+                <IconButton type={iconImages.uncompleted} />
             </View>
             <View style={styles.edit}>
                 <IconButton type={iconImages.edit} />

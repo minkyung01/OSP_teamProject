@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { basicColor, themeColor } from '../colors';
-import { iconImages } from '../iconImage';
+import { iconImages } from '../../src/images';
 import IconButton from './IconButton';
 import propTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ const List = ({ item, toggleList }) => {
     return (
         <View style={[styles.list, {flexDirection: 'row'}]}>
             <View style={styles.box}>
-                <IconButton type={item.completed ? iconImages.c_box : iconImages.uc_box} 
+                <IconButton type={item.completed ? iconImages.completed : iconImages.uncompleted} 
                 id={item.id} onPressOut={toggleList} />
             </View>
             <Text style={[styles.textList, 
