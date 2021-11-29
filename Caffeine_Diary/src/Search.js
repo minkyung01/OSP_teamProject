@@ -8,8 +8,8 @@ const Search = () => {
             <Image style={styles.coffee} source={require('./../assets/coffee.png')} />
 
             <Text style={styles.title}>TO-DO-LIST</Text>
-            <Text style={styles.searchBar}>
-                placeholder="Search a task"
+            <Text style={styles.searchBar}
+                placeholder="Search a task">
             </Text>
 
             <Text>search result: 1</Text>
