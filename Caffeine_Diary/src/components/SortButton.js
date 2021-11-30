@@ -42,6 +42,7 @@ const iconStyle= StyleSheet.create({
         alignItems: 'flex-start',
         flex: 1,
         fontSize: 20,
+        fontWeight: '700',
         color: basicColor.text,
         fontWeight:'400',
     },

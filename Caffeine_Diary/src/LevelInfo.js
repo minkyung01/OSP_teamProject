@@ -1,16 +1,15 @@
 import React from 'react';
 import {ScrollView,SafeAreaView, View,Text, StyleSheet, Image,Pressable} from 'react-native';
 import {iconImages, levelImages} from './images';
+import BackArrow from './components/BackArrow';
+import Title from './components/Title';
 
 const LevelInfo = () => {
     return(
         <ScrollView style={styles.container}>
-            <Pressable style={{marginLeft:'auto'}} onPress={()=>alert('back to My Page')}>
-                <Image style={styles.backIMG} source={iconImages.backArrow} />
-            </Pressable>
-            <View style={{alignItems:'center'}}>
-                <Text style={styles.title}>TO-DO-LIST</Text>
-            </View>
+        <BackArrow />
+        <SafeAreaView style={{paddingRight:10, paddingLeft:10}} >
+            <Title />
             <Text style={styles.content,{fontSize: 18,fontWeight:'700',marginRight:'auto'}}>Your level determined by attendance!</Text>
 
             <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#482800',width:'100%',paddingTop:20,paddingBottom:20}}>
@@ -45,12 +44,13 @@ const LevelInfo = () => {
                       <Text style={{fontSize:18,fontWeight:'700',color:'#FFFFFF'}}>Please use "Caffeine Diary" more to go to the higher level!</Text>
                 </SafeAreaView>
             </SafeAreaView>
+        </SafeAreaView>
         </ScrollView>
     );
 };
 const styles = StyleSheet.create({
     container: {
-        padding: 10,
+
         marginTop: 20,
         marginBottom: 20,
     },
@@ -65,13 +65,6 @@ const styles = StyleSheet.create({
         fontSize: 40,
         fontWeight: '700',
     },
-    backIMG: {
-        marginTop: 7,
-        marginBottom: 0,
-        width: 40,
-        height:30,
-    },
-
     WaterIMG:{
         width: '25%',
         height: '60%',

@@ -2,16 +2,13 @@ import React from 'react';
 import {ScrollView, SafeAreaView,Text,Image,StyleSheet,Pressable} from 'react-native';
 import {basicColor, themeColor} from './colors';
 import {stickerImages, levelImages, iconImages} from './images';
+import BackArrow from './components/BackArrow';
 import {LevelGroupSticker, CheckSticker, Attendance, LevelName} from './Info';
 
 const Stickers_and_Skins = () => {
     return(
         <ScrollView style={styles.container}>
-            <SafeAreaView style={{marginRight:10}}>
-                <Pressable style={{marginLeft:'auto'}} onPress={()=>alert('back to My Page')}>
-                 <Image style={styles.backIMG} source={iconImages.backArrow} />
-                </Pressable>
-            </SafeAreaView>
+            <BackArrow />
             <SafeAreaView style={{flexDirection:'row', alignItems:'center'}}>
                 <Image
                     style={(()=>{

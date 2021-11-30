@@ -22,7 +22,7 @@ const MyPage = () => {
            </SafeAreaView>
 
            <SafeAreaView style={styles.box1}>
-            <Image
+           <Image
             style={(()=>{
                 if(Attendance<21) return styles.WaterIMG;
                 else if(Attendance<60) return styles.BeanIMG;
@@ -50,9 +50,7 @@ const MyPage = () => {
                     <TextButton text="more" />
                 </SafeAreaView>
                 <SafeAreaView style={styles.box1}>
-                    <SafeAreaView style={{backgroundColor:styles.info.color,
-                                        width:80,height:80, margin:10}}>
-                    </SafeAreaView>
+                    <SafeAreaView style={{backgroundColor:styles.info.color,width:80,height:80, margin:10}}></SafeAreaView>
                     <Image source={CheckSticker} style={{width:60,height:60,margin:10}} />
                 </SafeAreaView>
            </SafeAreaView>
@@ -68,8 +66,8 @@ const MyPage = () => {
            <SafeAreaView style={{marginTop: 30}}>
             <Text style={styles.title}>How to list-up?</Text>
            </SafeAreaView>
-           <SortButton text="show the closest due date first" method="closest"/>
-           <SortButton text="show the latest added date first" method="latest"/>
+            <SortButton text="show the closest due date first" method="closest"/>
+            <SortButton text="show the latest added date first" method="latest"/>
         </ScrollView>
     );
 };
@@ -95,21 +93,21 @@ const styles = StyleSheet.create({
     },
     /*ID,level name*/
     info:{
-        fontSize: 40,
-        fontWeight: '700',
-        marginRight: 10,
-        marginBottom: 8,
-        color: (() => {
-            switch(SkinColor){
-                case "Orange": return themeColor.Orange.dark;
-                case "Mint": return themeColor.Mint.dark;
-                case "Blue": return themeColor.Blue.dark;
-                case "Pink": return themeColor.Pink.dark;
-                case "Purple": return themeColor.Purple.dark;
-                case "LightGreen": return themeColor.LightGreen.dark;
-            }
-        })(),
-    },
+            fontSize: 40,
+            fontWeight: '700',
+            marginRight: 10,
+            marginBottom: 8,
+            color: (() => {
+                switch(SkinColor){
+                    case "Orange": return themeColor.Orange.dark;
+                    case "Mint": return themeColor.Mint.dark;
+                    case "Blue": return themeColor.Blue.dark;
+                    case "Pink": return themeColor.Pink.dark;
+                    case "Purple": return themeColor.Purple.dark;
+                    case "LightGreen": return themeColor.LightGreen.dark;
+                }
+            })(),
+        },
     title:{
         fontSize: 23,
         fontWeight: '700',
