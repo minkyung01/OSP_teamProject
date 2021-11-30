@@ -3,8 +3,8 @@ import {Text, StyleSheet, Image, SafeAreaView, ScrollView, input, label} from 'r
 import {basicColor,themeColor} from './colors';
 import TextButton from './components/TextButton';
 import SortButton from './components/SortButton';
-import {LevelName, Attendance, ID, SkinColor,CheckSticker} from './Info';
-import {levelImages} from './images';
+import {LevelName, Attendance, ID, SkinColor,Level} from './Info';
+import {levelImages, iconImages} from './images';
 
 const MyPage = () => {
     return(
@@ -37,7 +37,7 @@ const MyPage = () => {
             <SafeAreaView style={styles.box2}>
                 <Text style={styles.title}>You are</Text>
                 <SafeAreaView style={styles.box1}>
-                    <Text style={styles.info}>{LevelName}</Text>
+                    <Text style={styles.info}>{LevelName[Level]}</Text>
                     <Text style={styles.title}>Level</Text>
                 </SafeAreaView>
             </SafeAreaView>
@@ -46,12 +46,12 @@ const MyPage = () => {
            <SafeAreaView style={{marginTop: 30}}>
                 <Text style={styles.title}>Choose check sticker/theme color</Text>
                 <SafeAreaView style={styles.box1}>
-                    <Text style={styles.title}>of {LevelName} level</Text>
+                    <Text style={styles.title}>of {LevelName[Level]} level</Text>
                     <TextButton text="more" />
                 </SafeAreaView>
                 <SafeAreaView style={styles.box1}>
                     <SafeAreaView style={{backgroundColor:styles.info.color,width:80,height:80, margin:10}}></SafeAreaView>
-                    <Image source={CheckSticker} style={{width:60,height:60,margin:10}} />
+                    <Image source={iconImages.stickerImages[Level]} style={{width:60,height:60,margin:10}} />
                 </SafeAreaView>
            </SafeAreaView>
 

@@ -1,9 +1,11 @@
 import React from 'react';
 import {ScrollView, SafeAreaView,Text,Image,StyleSheet,Pressable} from 'react-native';
 import {basicColor, themeColor} from './colors';
-import {stickerImages, levelImages, iconImages} from './images';
+import {levelImages, iconImages} from './images';
 import BackArrow from './components/BackArrow';
-import {LevelGroupSticker, CheckSticker, Attendance, LevelName} from './Info';
+import ColorBtn from './components/ColorBtn';
+import StickerBtn from './components/StickerBtn';
+import {Attendance, LevelName,Level} from './Info';
 
 const Stickers_and_Skins = () => {
     return(
@@ -24,24 +26,48 @@ const Stickers_and_Skins = () => {
                     })()}/>
                     <SafeAreaView>
                         <Text style={styles.text}>This is a sticker/skin that can be used</Text>
-                        <Text style={styles.text}>at the {LevelName} level</Text>
+                        <Text style={styles.text}>at the {LevelName[Level]} level</Text>
                     </SafeAreaView>
             </SafeAreaView>
+
             <SafeAreaView style={styles.box}>
-                <SafeAreaView style={{flexDirection:'row',justifyContent:'center'}}>
-                    <Pressable style={{padding:10}}><Image style={{width:50,height:50}} source={LevelGroupSticker[2]?LevelGroupSticker[2]:null} /></Pressable>
-                    <Pressable style={{padding:10}}><Image style={{width:50,height:50}} source={LevelGroupSticker[1]?LevelGroupSticker[1]:null} /></Pressable>
-                    <Pressable style={{padding:10}}><Image style={{width:50,height:50}} source={LevelGroupSticker[0]} /></Pressable>
-                    <Pressable style={{padding:10}}><Image style={{width:50,height:50}} source={LevelGroupSticker[3]?LevelGroupSticker[3]:null} /></Pressable>
-                    <Pressable style={{padding:10}}><Image style={{width:50,height:50}} source={LevelGroupSticker[4]?LevelGroupSticker[4]:null} /></Pressable>
+                <SafeAreaView style={styles.row}>
+                    <StickerBtn type={iconImages.stickerImages[0]} />
+                    {Attendance>=21?<StickerBtn type={iconImages.stickerImages[1]} />
+                    :<Image style={styles.sticker} source={iconImages.lock} />}
+                    {Attendance>=60?<StickerBtn type={iconImages.stickerImages[2]} />
+                    :<Image style={styles.sticker} source={iconImages.lock} />}
+                    {Attendance>=60?<StickerBtn type={iconImages.stickerImages[3]} />
+                    :<Image style={styles.sticker} source={iconImages.lock} />}
+                    {Attendance>=60?<StickerBtn type={iconImages.stickerImages[4]} />
+                    :<Image style={styles.sticker} source={iconImages.lock} />}
                 </SafeAreaView>
                 <SafeAreaView style={{alignItems:'center'}}>
                     <Text style={styles.text}>You can pick one of these</Text>
                     <Text style={styles.text}>stickers and use it on the checkbox</Text>
                 </SafeAreaView>
             </SafeAreaView>
+
             <SafeAreaView style={styles.box}>
                 <SafeAreaView style={{flexDirection:'row',justifyContent:'center'}}>
+                    <ColorBtn color={themeColor.Orange}/>
+                    <ColorBtn color={themeColor.Mint}/>
+                </SafeAreaView>
+                <SafeAreaView style={styles.row}>
+                    {Attendance>=21?<ColorBtn color={themeColor.Blue}/>
+                     :<Image style={{width:100,height:100,margin:15}} source={iconImages.lock} />}
+                     {Attendance>=21?<ColorBtn color={themeColor.Pink}/>
+                     :<Image style={{width:100,height:100,margin:15}} source={iconImages.lock} />}
+                </SafeAreaView>
+                <SafeAreaView style={styles.row}>
+                     {Attendance>=60?<ColorBtn color={themeColor.Purple}/>
+                      :<Image style={{width:100,height:100,margin:15}} source={iconImages.lock} />}
+                     {Attendance>=60?<ColorBtn color={themeColor.LightGreen}/>
+                      :<Image style={{width:100,height:100,margin:15}} source={iconImages.lock} />}
+                </SafeAreaView>
+                <SafeAreaView style={{alignItems:'center'}}>
+                    <Text style={styles.text}>You can pick one of these</Text>
+                    <Text style={styles.text}>colors and use it as theme-color</Text>
                 </SafeAreaView>
             </SafeAreaView>
 
@@ -54,18 +80,22 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
     },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
     box: {
         marginLeft:20,
         marginRight:20,
-        paddingTop:50,
+        paddingTop:40,
         marginTop:20,
         paddingBottom:30,
         backgroundColor:basicColor.itemBackground,
     },
-    colorBox: {
-        width: 60,
-        height: 60,
-        padding: 10,
+    sticker: {
+        width: 50,
+        height: 50,
+        margin: 10,
     },
     WaterIMG:{
         width: 60,

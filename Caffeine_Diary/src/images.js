@@ -13,6 +13,7 @@ import Share from '../assets/shared.png';
 import Up from '../assets/up.png';
 import Down from '../assets/down.png';
 import Edit from '../assets/pencil.png';
+import Lock from '../assets/lock.png';
 
 export const iconImages = {
     uncompleted: UncheckedBox,
@@ -22,15 +23,11 @@ export const iconImages = {
     up: Up,
     down: Down,
     edit: Edit,
+    lock: Lock,
+    stickerImages: [check, coffeeBean, Cake_1, Cake_2, Cake_3],
 };
 export const levelImages = {
     Water: WaterIcon,
     CoffeeBean: BeanIcon,
     Americano: AmericanoIcon
-};
-
-export const stickerImages = {
-    Water : [check],
-    CoffeeBean : [check, coffeeBean],
-    Americano : [check, coffeeBean, Cake_1, Cake_2, Cake_3],
 };
