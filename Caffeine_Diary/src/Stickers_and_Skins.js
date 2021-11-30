@@ -1,45 +1,50 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import InfoContext from './components/InfoContext';
 import {ScrollView, SafeAreaView,Text,Image,StyleSheet,Pressable} from 'react-native';
 import {basicColor, themeColor} from './colors';
 import {levelImages, iconImages} from './images';
 import BackArrow from './components/BackArrow';
 import ColorBtn from './components/ColorBtn';
 import StickerBtn from './components/StickerBtn';
-import {Attendance, LevelName,Level} from './Info';
 
 const Stickers_and_Skins = () => {
+    const userContext = useContext(InfoContext);
     return(
         <ScrollView style={styles.container}>
             <BackArrow />
             <SafeAreaView style={{flexDirection:'row', alignItems:'center'}}>
                 <Image
                     style={(()=>{
-                        if(Attendance<21) return styles.WaterIMG;
-                        else if(Attendance<60) return styles.BeanIMG;
+                        if(userContext.Level==0) return styles.WaterIMG;
+                        else if(userContext.Level==1) return styles.BeanIMG;
                         else return styles.CoffeeIMG;
                     })()} //icon image
 
                     source={(()=>{
-                        if(Attendance<21) return levelImages.Water;
-                        else if(Attendance<60) return levelImages.CoffeeBean;
+                        if(userContext.Level==0) return levelImages.Water;
+                        else if(userContext.Level==1) return levelImages.CoffeeBean;
                         else return levelImages.Americano;
                     })()}/>
                     <SafeAreaView>
                         <Text style={styles.text}>This is a sticker/skin that can be used</Text>
-                        <Text style={styles.text}>at the {LevelName[Level]} level</Text>
+                        <SafeAreaView style={{flexDirection:'row'}}>
+                            <Text style={styles.text}>at the </Text>
+                            <Text style={{fontWeight:'700',fontSize:18,color:userContext.SkinColor.dark}}>{userContext.LevelName[userContext.Level]}</Text>
+                            <Text style={styles.text}> level</Text>
+                        </SafeAreaView>
                     </SafeAreaView>
             </SafeAreaView>
 
             <SafeAreaView style={styles.box}>
                 <SafeAreaView style={styles.row}>
-                    <StickerBtn type={iconImages.stickerImages[0]} />
-                    {Attendance>=21?<StickerBtn type={iconImages.stickerImages[1]} />
+                    <StickerBtn type={iconImages.stickerImages[0]} num={0} />
+                    {userContext.Attendance>=21?<StickerBtn type={iconImages.stickerImages[1]} num={1} />
                     :<Image style={styles.sticker} source={iconImages.lock} />}
-                    {Attendance>=60?<StickerBtn type={iconImages.stickerImages[2]} />
+                    {userContext.Attendance>=60?<StickerBtn type={iconImages.stickerImages[2]} num={2} />
                     :<Image style={styles.sticker} source={iconImages.lock} />}
-                    {Attendance>=60?<StickerBtn type={iconImages.stickerImages[3]} />
+                    {userContext.Attendance>=60?<StickerBtn type={iconImages.stickerImages[3]} num={3} />
                     :<Image style={styles.sticker} source={iconImages.lock} />}
-                    {Attendance>=60?<StickerBtn type={iconImages.stickerImages[4]} />
+                    {userContext.Attendance>=60?<StickerBtn type={iconImages.stickerImages[4]} num={4} />
                     :<Image style={styles.sticker} source={iconImages.lock} />}
                 </SafeAreaView>
                 <SafeAreaView style={{alignItems:'center'}}>
@@ -54,15 +59,15 @@ const Stickers_and_Skins = () => {
                     <ColorBtn color={themeColor.Mint}/>
                 </SafeAreaView>
                 <SafeAreaView style={styles.row}>
-                    {Attendance>=21?<ColorBtn color={themeColor.Blue}/>
+                    {userContext.Attendance>=21?<ColorBtn color={themeColor.Blue}/>
                      :<Image style={{width:100,height:100,margin:15}} source={iconImages.lock} />}
-                     {Attendance>=21?<ColorBtn color={themeColor.Pink}/>
+                     {userContext.Attendance>=21?<ColorBtn color={themeColor.Pink}/>
                      :<Image style={{width:100,height:100,margin:15}} source={iconImages.lock} />}
                 </SafeAreaView>
                 <SafeAreaView style={styles.row}>
-                     {Attendance>=60?<ColorBtn color={themeColor.Purple}/>
+                     {userContext.Attendance>=60?<ColorBtn color={themeColor.Purple}/>
                       :<Image style={{width:100,height:100,margin:15}} source={iconImages.lock} />}
-                     {Attendance>=60?<ColorBtn color={themeColor.LightGreen}/>
+                     {userContext.Attendance>=60?<ColorBtn color={themeColor.LightGreen}/>
                       :<Image style={{width:100,height:100,margin:15}} source={iconImages.lock} />}
                 </SafeAreaView>
                 <SafeAreaView style={{alignItems:'center'}}>
@@ -76,13 +81,15 @@ const Stickers_and_Skins = () => {
 };
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 10,
+        paddingTop: 20,
         marginTop: 20,
         marginBottom: 20,
+
     },
     row: {
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center',
     },
     box: {
         marginLeft:20,

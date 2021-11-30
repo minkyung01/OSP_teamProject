@@ -1,16 +1,25 @@
-import React from 'react';
+import React,{useContext} from 'react';
+import InfoContext from './InfoContext';
 import {Pressable, Image, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {iconImages} from '../images';
 
-const StickerBtn = ({type}) =>{
+const StickerBtn = ({type, num}) =>{
+    const userContext = useContext(InfoContext);
     return(
-        <Pressable><Image style={styles.sticker} source={type} /></Pressable>
+        <Pressable onPress={()=>{
+            userContext.setSticker(num);
+            }}>
+        <Image style={{
+            width: (userContext.CheckSticker==num?75:50),
+            height: (userContext.CheckSticker==num?75:50),
+            margin: 10,
+        }} source={type} /></Pressable>
     );
 };
 
 StickerBtn.propTypes={
-    color: PropTypes.oneOf(Object.values(iconImages.stickerImages)).isRequired, /*Explanation of the method*/
+    type: PropTypes.oneOf(Object.values(iconImages.stickerImages)).isRequired, /*Explanation of the method*/
 };
 const styles = StyleSheet.create({
     sticker: {

@@ -8,11 +8,11 @@ const LevelInfo = () => {
     return(
         <ScrollView style={styles.container}>
         <BackArrow />
-        <SafeAreaView style={{paddingRight:10, paddingLeft:10}} >
+        <SafeAreaView style={{paddingRight:10, paddingLeft:10,alignItems:'center'}} >
             <Title />
-            <Text style={styles.content,{fontSize: 18,fontWeight:'700',marginRight:'auto'}}>Your level determined by attendance!</Text>
+            <Text style={{fontSize: 22,fontWeight:'700',marginRight:'auto',marginLeft:5,marginBottom:10}}>Your level determined by attendance!</Text>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#482800',width:'100%',paddingTop:20,paddingBottom:20}}>
+            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#482800',width:'100%',paddingTop:30,paddingBottom:30}}>
                 <Image style={styles.CoffeeIMG}
                         source={levelImages.Americano}/>
                 <SafeAreaView style={styles.content}>
@@ -23,7 +23,7 @@ const LevelInfo = () => {
                 </SafeAreaView>
             </SafeAreaView>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#864B03',width:'100%',marginTop:10,paddingTop:20,paddingBottom:20}}>
+            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#864B03',width:'100%',marginTop:10,paddingTop:30,paddingBottom:30}}>
                 <Image style={styles.BeanIMG}
                          source={levelImages.CoffeeBean}/>
                 <SafeAreaView style={styles.content}>
@@ -34,7 +34,7 @@ const LevelInfo = () => {
                 </SafeAreaView>
             </SafeAreaView>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#C9893B',width:'100%',marginTop:10,paddingTop:20,paddingBottom:20}}>
+            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#C9893B',width:'100%',marginTop:10,paddingTop:30,paddingBottom:50}}>
                 <Image style={styles.WaterIMG}
                           source={levelImages.Water}/>
                 <SafeAreaView style={styles.content}>
@@ -50,7 +50,7 @@ const LevelInfo = () => {
 };
 const styles = StyleSheet.create({
     container: {
-
+        paddingTop:20,
         marginTop: 20,
         marginBottom: 20,
     },

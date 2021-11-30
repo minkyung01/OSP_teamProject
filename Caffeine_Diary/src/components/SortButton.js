@@ -1,14 +1,20 @@
 import React, {useContext} from 'react';
+import InfoContext from './InfoContext';
 import {Pressable, StyleSheet, View, Image, Text} from 'react-native';
 import {basicColor} from '../colors';
 import PropTypes from 'prop-types';
 import {iconImages} from '../images';
-import {Sort} from '../Info';
+
 /* button to select the sort method*/
 const SortButton = ({text, method})=>{
+    const userContext = useContext(InfoContext);
     return(
-        <Pressable style={iconStyle.container}>
-            <CheckButton type={(Sort===method)?iconImages.completed:iconImages.uncompleted} />
+        <Pressable style={iconStyle.container}
+            onPress={()=>{
+                userContext.setSort(method);
+            }}>
+
+            <CheckButton type={(userContext.Sort===method)?iconImages.completed:iconImages.uncompleted} />
             <Text style={iconStyle.contents}>{text}</Text>
         </Pressable>
     );
