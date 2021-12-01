@@ -1,26 +1,43 @@
-import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, {useContext} from "react";
+import InfoContext from './InfoContext';
+import { View, StyleSheet, Text, SafeAreaView,Pressable } from "react-native";
 import { basicColor, themeColor } from '../colors';
+import TextButton from './TextButton';
 
-const NavBar = ({menu}) => {
+const NavBar = () => {
+    const userContext = useContext(InfoContext);
     return (
-        <View style={styles.nav}>
-            <Text style={styles.textNav}>{menu}</Text>
-        </View>
+    <SafeAreaView style={[styles.nav,{backgroundColor: userContext.SkinColor.dark}]}>
+        <NavText text={"      View" + "\n" + "TO-DO-LIST"} />
+        <NavText text={"My Page"} />
+        <NavText text={"Search"} />
+        <NavText text={"  View" + "\n" + "Ranking"} />
+    </SafeAreaView>
     );
 };
-
+const NavText = ({text}) => {
+    return(
+        <Pressable onPress={()=>{alert(text)}}>
+            <Text style={styles.textNav}>{text}</Text>
+        </Pressable>
+    );
+};
 const styles = StyleSheet.create({
     nav: {
-        alignContent: 'center',
-        marginBottom: 10,
+        flexDirection:'row',
+        width:'100%',
+        height:80,
+        justifyContent:'center',
+        alignItems:'center',
+        padding: 15,
+
     },
     textNav: {
-        fontSize: 15,  
+        fontSize: 18,
         fontWeight: '700',
         color: basicColor.background,
-        marginLeft: 32,
-        marginTop: 25,
+        paddingRight:10,
+        paddingLeft:10,
     },
 });
 

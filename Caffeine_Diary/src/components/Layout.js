@@ -1,8 +1,10 @@
-import React, {useState} from "react";
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import React, {useState, useContext} from "react";
+import InfoContext from './InfoContext';
+import { StyleSheet, Text, View, ScrollView, Image,Pressable } from "react-native";
 import { basicColor, themeColor } from "../colors";
 import { iconImages } from '../../src/images';
 import IconButton from './IconButton';
+import Title from './Title';
 
 import Category from "./Category";
 import List from "./List";
@@ -10,16 +12,17 @@ import NavBar from "./NavBar";
 
 export const Header = () => {
     return (
-        <View style={[styles.header, {flexDirection: 'row'}]}>
-            <Image style={styles.image} source={require('../../assets/coffee.png')} />
-            <Text style={styles.title}>TO-DO-LIST</Text>
+        <View style={styles.header}>
+            <Title />
         </View>
     );
 };
 export const SubContents = () => {
+    const userContext = useContext(InfoContext);
     return (
-        <View style={[styles.subContents, {flexDirection: 'row'}]}>
-            <Text style={styles.category}>category</Text>
+        <View style={[styles.subContents, {flexDirection: 'row',alignItems:'center'}]}>
+            <Pressable style={[styles.category,{backgroundColor: userContext.SkinColor.dark,}]}><Text style={{color: basicColor.background,fontWeight: '700',fontSize: 15,}}>
+            category</Text></Pressable>
             <View style={styles.share}>
                 <IconButton type={iconImages.share} />
             </View>
@@ -28,66 +31,36 @@ export const SubContents = () => {
                 <IconButton type={iconImages.uncompleted} />
             </View>
             <View style={styles.edit}>
-                <IconButton type={iconImages.edit} />
+                <IconButton type={iconImages.edit} page={"EditList"}/>
             </View>
         </View>
     );
 };
 
 export const MainContents = () => {
-
-    const [newList, setNewList] = useState('');
-
-    const [lists, setLists] = useState({
-        '1': {id: '1', item: "test #1", completed: false},
-        '2': {id: '2', item: "test #2", completed: true},
-    });
-
-    const _addList = () => {
-        const ID = Date.now().toString();
-        const newListObject = {
-            [ID]: {id: ID, item: newList, completed: false},
-        };
-        setNewList('');
-        setLists({...lists, ...newListObject});
-    } ;
-
-    const _toggleList = id => {
-        const currentLists = Object.assign({}, lists);
-        currentLists[id]['completed'] = !currentLists[id]['completed'];
-        setLists(currentLists);
-    };
+    const userContext = useContext(InfoContext);
 
     return (
         <View style={styles.mainContents}>
             <Category title="Today's Schedule" />
             <ScrollView>
-                {Object.values(lists).reverse().map(item => (
-                    <List key={item.id} item={item}
-                    toggleList={_toggleList} />
+                {Object.values(userContext.Lists).reverse().map(listItem => (
+                    <List key={listItem.date} item={listItem} action={userContext._toggleList} page={"showList"}/>
                 ))}
             </ScrollView>
-            <View>
-                <Text style={styles.add}>+ ADD</Text>
-            </View>
         </View>
     );
 };
 
 export const Footer = () => {
     return (
-        <View style={[styles.footer, {flexDirection: 'row'}]}>
-            <NavBar menu={"       View" + "\n" + "TO-DO-LIST"} />
-            <NavBar menu="My Page" />
-            <NavBar menu=" Search" />
-            <NavBar menu={"   View" + "\n" + "Ranking"} />
-        </View>
+        <NavBar />
     );
 };
 
 const styles = StyleSheet.create({
     header: {
-        flex: 4,
+        alignItems:'center',
         backgroundColor: basicColor.background,
     },
     subContents: {
@@ -97,10 +70,6 @@ const styles = StyleSheet.create({
     mainContents: {
         flex: 18,
         backgroundColor: basicColor.background,
-    },
-    footer: {
-        flex: 3,
-        backgroundColor: themeColor.Orange.dark,
     },
     title: {
         color: basicColor.text,
@@ -118,29 +87,23 @@ const styles = StyleSheet.create({
     },
     category: {
         width: '20%',
-        backgroundColor: themeColor.Orange.dark,
-        color: basicColor.background,
-        alignContent: 'center',
-        marginTop: 10,
-        marginBottom: 10,
+        height:40,
+        alignItems:'center',
+        justifyContent: 'center',
         marginLeft: '10%',
-        paddingLeft: 11,
-        paddingTop: 7,
+        padding: 7,
         fontWeight: '700',
         fontSize: 15,
         borderRadius: 5,
     },
     share: {
         marginLeft: 15,
-        marginTop: 13,
     },
     select: {
-        marginTop: 17,
         marginLeft: 70,
         fontWeight: '500',
     },
     uc_box: {
-        marginTop: 12,
         marginLeft: 7,
     },
     selected: {
@@ -161,6 +124,5 @@ const styles = StyleSheet.create({
     },
     edit: {
         marginLeft: 10,
-        marginTop: 15,
     },
 });

@@ -1,29 +1,38 @@
-import React from "react";
+import React, {useContext} from "react";
+import InfoContext from './InfoContext';
 import { View, StyleSheet, Text } from "react-native";
 import { basicColor, themeColor } from '../colors';
 import { iconImages } from '../../src/images';
 import IconButton from './IconButton';
 import propTypes from 'prop-types';
 
-const List = ({ item, toggleList }) => {
+const List = ({ item, action,page }) => {
+    const userContext = useContext(InfoContext);
     return (
-        <View style={[styles.list, {flexDirection: 'row'}]}>
+        <View style={[styles.list,{backgroundColor: userContext.SkinColor.light}]}>
             <View style={styles.box}>
-                <IconButton type={item.completed ? iconImages.completed : iconImages.uncompleted} 
-                id={item.id} onPressOut={toggleList} />
+                <IconButton type={(()=>{
+                    if(page=="showList")
+                        return (item.completed ? iconImages.completed : iconImages.uncompleted);
+                    else
+                        return iconImages.remove;}
+                        )()
+                }
+                id={item.date} onPressOut={action} />
             </View>
-            <Text style={[styles.textList, 
+            <Text style={[styles.textList,
             {textDecorationLine: (item.completed? 'line-through' : 'none')}]}>
-                {item.id}
-            </Text> 
-            <View style={{flexDirection: 'column'}}>
-                <View style={styles.up}>
-                    <IconButton type={iconImages.up} />
-                </View>
-                <View style={styles.down}>
-                    <IconButton type={iconImages.down} />
-                </View>
-            </View>
+                {item.todo}
+            </Text>
+            {(page=="showList")&&<UpDown />}
+        </View>
+    );
+};
+const UpDown =()=> {
+    return(
+        <View>
+            <IconButton type={iconImages.up} />
+            <IconButton type={iconImages.down} />
         </View>
     );
 };
@@ -32,35 +41,31 @@ const List = ({ item, toggleList }) => {
 const styles = StyleSheet.create({
     list: {
         width: '80%',
-        backgroundColor: themeColor.Orange.light,
-        alignContent: 'center',
         alignSelf: 'center',
         marginBottom: 7,
+        paddingLeft:10,
+        paddingRight:10,
         borderRadius: 5,
+        flexDirection: 'row',
+        justifyContent:'space-between',
     },
     textList: {
         alignSelf: 'center',
-        fontSize: 20,  
+        fontSize: 20,
         fontWeight: '700',
         color: basicColor.text,
-        marginBottom: 5,
-        marginLeft: 13,
+        marginRight: 'auto',
+        marginLeft: 10,
     },
     box: {
-        marginLeft: 10,
-        marginTop: 15,
-    },
-    up: {
-        marginLeft: 80, //marginLeft 대신 오른쪽 정렬 기능이 필요
-    },
-    down: {
-        marginLeft: 80, //marginLeft 대신 오른쪽 정렬 기능이 필요
+        margin: 15,
     },
 });
 
 List.propTypes = {
     item: propTypes.object.isRequired,
-    toggleList: propTypes.func.isRequired,
+    action: propTypes.func.isRequired,
+    page: propTypes.string.isRequired,
 };
 
 export default List;
