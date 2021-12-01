@@ -1,16 +1,19 @@
 import React from 'react';
-import {SafeAreaView, View,Text, StyleSheet, Image} from 'react-native';
-
+import {StatusBar, SafeAreaView, View,Text, StyleSheet, Image, ScrollView, Dimensions} from 'react-native';
+import { textStyles } from './styles';
 const Ranking = () => {
+    const width = Dimensions.get('window').width;
     return(
         <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
+            <ScrollView width = {width-20} height = '80%'>
             
             <Image style={styles.coffee} source={require('./../assets/coffee.png')} />
 
             <Text style={styles.title}>이화사랑's achievement today.</Text>
             <Text style={styles.dropdown}>Change standard</Text>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#FF991C',width:'100%',paddingTop:10,paddingBottom:10}}>
+            <SafeAreaView style={{alignItems:'center',flexDirection:'column',backgroundColor:'#FF991C',width:'100%',paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
                     <Text style={styles.best}>이화사랑 achieved 80% today</Text>
                 </SafeAreaView>
@@ -47,7 +50,7 @@ const Ranking = () => {
                 </SafeAreaView>
             </SafeAreaView>
 
-
+            </ScrollView>
         </SafeAreaView>
     );
 };
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginBottom: 8,
         width: '20%',
-        height: '60%',
+        height: '20%',
     },
     title: {
         alignItems: 'center',
