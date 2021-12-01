@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import InfoContext from './InfoContext';
 import { View, StyleSheet, Text } from "react-native";
 import { basicColor, themeColor } from '../colors';
-import { iconImages } from '../../src/images';
+import { iconImages, stickerImages } from '../../src/images';
 import IconButton from './IconButton';
 import propTypes from 'prop-types';
 
@@ -13,7 +13,7 @@ const List = ({ item, action,page }) => {
             <View style={styles.box}>
                 <IconButton type={(()=>{
                     if(page=="showList")
-                        return (item.completed ? iconImages.completed : iconImages.uncompleted);
+                        return (item.completed ? stickerImages[userContext.CheckSticker] : iconImages.uncompleted);
                     else
                         return iconImages.remove;}
                         )()

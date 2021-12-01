@@ -28,8 +28,8 @@ export const iconImages = {
     add:Add,
     remove: Remove,
     lock: Lock,
-    stickerImages: [check, coffeeBean, Cake_1, Cake_2, Cake_3],
 };
+export const stickerImages = [check, coffeeBean, Cake_1, Cake_2, Cake_3];
 export const levelImages = {
     Water: WaterIcon,
     CoffeeBean: BeanIcon,

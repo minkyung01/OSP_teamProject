@@ -68,7 +68,7 @@ const App = () =>{
     };
     return(
         <InfoContext.Provider value={userInfo}>
-        <EditList />
+        <AppMain />
         </InfoContext.Provider>
     );
 }

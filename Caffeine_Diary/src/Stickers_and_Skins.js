@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import InfoContext from './components/InfoContext';
 import {ScrollView, SafeAreaView,Text,Image,StyleSheet,Pressable} from 'react-native';
 import {basicColor, themeColor} from './colors';
-import {levelImages, iconImages} from './images';
+import {levelImages, iconImages, stickerImages} from './images';
 import BackArrow from './components/BackArrow';
 import ColorBtn from './components/ColorBtn';
 import StickerBtn from './components/StickerBtn';
@@ -37,14 +37,14 @@ const Stickers_and_Skins = () => {
 
             <SafeAreaView style={styles.box}>
                 <SafeAreaView style={styles.row}>
-                    <StickerBtn type={iconImages.stickerImages[0]} num={0} />
-                    {userContext.Attendance>=21?<StickerBtn type={iconImages.stickerImages[1]} num={1} />
+                    <StickerBtn type={stickerImages[0]} num={0} />
+                    {userContext.Attendance>=21?<StickerBtn type={stickerImages[1]} num={1} />
                     :<Image style={styles.sticker} source={iconImages.lock} />}
-                    {userContext.Attendance>=60?<StickerBtn type={iconImages.stickerImages[2]} num={2} />
+                    {userContext.Attendance>=60?<StickerBtn type={stickerImages[2]} num={2} />
                     :<Image style={styles.sticker} source={iconImages.lock} />}
-                    {userContext.Attendance>=60?<StickerBtn type={iconImages.stickerImages[3]} num={3} />
+                    {userContext.Attendance>=60?<StickerBtn type={stickerImages[3]} num={3} />
                     :<Image style={styles.sticker} source={iconImages.lock} />}
-                    {userContext.Attendance>=60?<StickerBtn type={iconImages.stickerImages[4]} num={4} />
+                    {userContext.Attendance>=60?<StickerBtn type={stickerImages[4]} num={4} />
                     :<Image style={styles.sticker} source={iconImages.lock} />}
                 </SafeAreaView>
                 <SafeAreaView style={{alignItems:'center'}}>
