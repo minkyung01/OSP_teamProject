@@ -14,6 +14,8 @@ import Up from '../assets/up.png';
 import Down from '../assets/down.png';
 import Edit from '../assets/pencil.png';
 import Lock from '../assets/lock.png';
+import Add from '../assets/plus.png';
+import Remove from '../assets/minus.png';
 
 export const iconImages = {
     uncompleted: UncheckedBox,
@@ -23,6 +25,8 @@ export const iconImages = {
     up: Up,
     down: Down,
     edit: Edit,
+    add:Add,
+    remove: Remove,
     lock: Lock,
     stickerImages: [check, coffeeBean, Cake_1, Cake_2, Cake_3],
 };

@@ -1,25 +1,26 @@
-import React from "react";
+import React,{useContext} from "react";
+import InfoContext from './InfoContext';
 import { View, StyleSheet, Text } from "react-native";
 import { basicColor, themeColor } from '../colors';
 
 const Category = ({title}) => {
+    const userContext = useContext(InfoContext);
     return (
-        <View style={styles.category}>
+        <View style={{
+            width: '80%',
+            backgroundColor: userContext.SkinColor.dark,
+            alignContent: 'center',
+            alignSelf: 'center',
+            marginTop: 10,
+            marginBottom: 13,
+            borderRadius: 5,
+        }}>
             <Text style={styles.textCategory}>{title}</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    category: {
-        width: '80%',
-        backgroundColor: themeColor.Orange.dark,
-        alignContent: 'center',
-        alignSelf: 'center',
-        marginTop: 10,
-        marginBottom: 13,
-        borderRadius: 5,
-    },
     textCategory: {
         alignSelf: 'center',
         fontSize: 30,  
