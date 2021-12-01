@@ -1,12 +1,18 @@
 import React from 'react';
-import {SafeAreaView, View,Text, StyleSheet, Image, TextInput} from 'react-native';
-import {basicColor} from './colors'
-import Title from './components/Title';
+import {StatusBar, SafeAreaView, View,Text, StyleSheet, Image, TextInput,ScrollView, Dimensions} from 'react-native';
+import {basicColor} from './colors';
+import { textStyles } from './styles';
 
 const Search = () => {
+    const width = Dimensions.get('window').width;
     return(
         <SafeAreaView style={styles.container}>
-            <Title />
+            <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
+            <ScrollView width = {width-20} height = '80%'>
+            <SafeAreaView style={{flexDirection:'row',alignItems:'center',margin:10}}>
+                <Image style={styles.coffee} source={require('./../assets/coffee.png')} />
+                <Text style={styles.title}>TO-DO-LIST</Text>
+            </SafeAreaView>
             <TextInput style={styles.searchBar}
                 placeholder="Search a task">
             </TextInput>
@@ -16,7 +22,7 @@ const Search = () => {
                      <Text style={styles.result}>Buying milk</Text>
                 </SafeAreaView>
             </SafeAreaView>
-
+            </ScrollView>
             
         </SafeAreaView>
     );
@@ -33,6 +39,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     coffee: {
+        marginLeft: 10,
+        marginRight: 10,
         marginBottom: 8,
         width: 60,
         height: 90,
