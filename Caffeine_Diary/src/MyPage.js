@@ -4,7 +4,7 @@ import {Text, StyleSheet, Image, SafeAreaView, ScrollView, input, label} from 'r
 import {basicColor,themeColor} from './colors';
 import TextButton from './components/TextButton';
 import SortButton from './components/SortButton';
-import {levelImages, iconImages} from './images';
+import {levelImages, iconImages, stickerImages} from './images';
 
 const MyPage = () => {
     const userContext = useContext(InfoContext);
@@ -23,7 +23,7 @@ const MyPage = () => {
                 <Text style={styles.text}>has been</Text>
                 <SafeAreaView style={styles.box1}>
                     <Text style={styles.text}>attending for </Text>
-                    <Text style={styles.title}>{useContext.Attendance} Day!</Text>
+                    <Text style={styles.title}>{userContext.Attendance} Day!</Text>
                 </SafeAreaView>
             </SafeAreaView>
            </SafeAreaView>
@@ -64,7 +64,7 @@ const MyPage = () => {
                 </SafeAreaView>
                 <SafeAreaView style={styles.box1}>
                     <SafeAreaView style={{backgroundColor:userContext.SkinColor.dark,width:80,height:80, margin:10}}></SafeAreaView>
-                    <Image source={iconImages.stickerImages[userContext.CheckSticker]} style={{width:60,height:60,margin:10}} />
+                    <Image source={stickerImages[userContext.CheckSticker]} style={{width:60,height:60,margin:10}} />
                 </SafeAreaView>
            </SafeAreaView>
 

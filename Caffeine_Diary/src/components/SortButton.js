@@ -14,7 +14,7 @@ const SortButton = ({text, method})=>{
                 userContext.setSort(method);
             }}>
 
-            <CheckButton type={(userContext.Sort===method)?iconImages.completed:iconImages.uncompleted} />
+            <CheckButton type={(userContext.Sort===method)?iconImages.completed:iconImages.uncompleted}/>
             <Text style={iconStyle.contents}>{text}</Text>
         </Pressable>
     );
@@ -26,9 +26,7 @@ SortButton.propTypes={
 
 const CheckButton = ({type})=>{
     return(
-        <Pressable>
-            <Image source={type} style={iconStyle.icon}/>
-        </Pressable>
+       <Image source={type} style={iconStyle.icon}/>
     );
 };
 CheckButton.propTypes = {
