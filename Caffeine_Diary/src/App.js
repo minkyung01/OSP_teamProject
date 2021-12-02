@@ -37,12 +37,6 @@ const App = () =>{
         };
         setLists({...lists, ...newListObject});
     };
-    // change completed/uncompleted state
-    const _toggleList = date => {
-        const currentLists = Object.assign({}, lists);
-        currentLists[date]['completed'] = !currentLists[date]['completed'];
-        setLists(currentLists);
-    };
     const userInfo={
         ID: id,
         Attendance: attendance,
@@ -63,12 +57,11 @@ const App = () =>{
         setSticker,
         setLists,
         _addList,
-        _toggleList,
         date,
     };
     return(
         <InfoContext.Provider value={userInfo}>
-        <AppMain />
+        <AppMain/>
         </InfoContext.Provider>
     );
 }

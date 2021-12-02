@@ -1,6 +1,5 @@
 import React from "react";
 import { Pressable, StyleSheet, Image } from "react-native";
-import { iconImages } from "../../src/images";
 import propTypes from 'prop-types';
 
 const IconButton = ({type, onPressOut, id}) => {
@@ -27,7 +26,7 @@ const iconStyle = StyleSheet.create({
 });
 
 IconButton.propTypes = {
-    type: propTypes.oneOf(Object.values(iconImages)).isRequired,
+    type: propTypes.node.isRequired,
     onPressOut: propTypes.func,
     id: propTypes.string,
 };

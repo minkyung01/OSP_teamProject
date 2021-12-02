@@ -45,7 +45,13 @@ export const MainContents = () => {
             <Category title="Today's Schedule" />
             <ScrollView>
                 {Object.values(userContext.Lists).reverse().map(listItem => (
-                    <List key={listItem.date} item={listItem} action={userContext._toggleList} page={"showList"}/>
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext.setLists(currentLists);
+                       }} page={"showList"}/>
                 ))}
             </ScrollView>
         </View>
