@@ -14,7 +14,7 @@ export const themeColor = { //light & dark color for each theme color
         dark: '#10C599',
     },
     Blue: {
-        light: '#98FFEC',
+        light: '#CBD6FF',
         dark: '#597EFF',
     },
     Pink: {
