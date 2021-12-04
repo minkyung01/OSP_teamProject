@@ -1,5 +1,6 @@
 import React from 'react';
 import {StatusBar, SafeAreaView, View,Text, StyleSheet, Image, ScrollView, Dimensions, Pressable} from 'react-native';
+import { basicColor } from './colors';
 import { textStyles } from './styles';
 const Ranking = () => {
     const width = Dimensions.get('window').width;
@@ -10,50 +11,50 @@ const Ranking = () => {
             
             <SafeAreaView style={{flexDirection:'row'}}>
                 <Image style={styles.coffee} source={require('./../assets/coffee.png')} />
-                <SafeAreaView style={{flexDirection:'column'}}>
+                <SafeAreaView style={{flexDirection:'column', alignItems:'center'}}>
                 <Text style={styles.title}>이화사랑's</Text>
-                <Text style={styles.text}> achievement today.</Text>
+                <Text style={styles.text}>completion rate</Text>
                 </SafeAreaView>
             </SafeAreaView>
 
-            <Pressable>
-                <Text style={styles.dropdown}>Change standard</Text>
+            <Pressable style={{alignItems:'flex-end'}}>
+                <Text style={styles.dropdown}>Today</Text>
             </Pressable>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'column',backgroundColor:'#FF991C',width:'100%',paddingTop:10,paddingBottom:10}}>
+            <SafeAreaView style={{alignItems:'center',flexDirection:'column',backgroundColor:'#FF991C',paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
                     <Text style={styles.best}>이화사랑 achieved 80% today</Text>
                 </SafeAreaView>
             </SafeAreaView>
 
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#FFE4C3',width:'100%',marginTop:10,paddingTop:10,paddingBottom:10}}>
+            <SafeAreaView style={{flexDirection:'row', backgroundColor:'#FF991C',marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
-                     <Text style={styles.rankings}>Today’s Ranking</Text>
+                     <Text style={styles.completionRate}>Today’s completion rate</Text>
                 </SafeAreaView>
             </SafeAreaView>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#FFE4C3',width:'100%',marginTop:10,paddingTop:10,paddingBottom:10}}>
+            <SafeAreaView style={{flexDirection:'row',backgroundColor:'#FFE4C3',marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
-                     <Text style={styles.rankings}>Love Caffeine(88%)</Text>
+                     <Text style={styles.rankings}>assignment(88%)</Text>
                 </SafeAreaView>
             </SafeAreaView>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#FFE4C3',width:'100%',marginTop:10,paddingTop:10,paddingBottom:10}}>
+            <SafeAreaView style={{flexDirection:'row',backgroundColor:'#FFE4C3',marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
-                     <Text style={styles.rankings}>이화사랑(44%)</Text>
+                     <Text style={styles.rankings}>lecture(44%)</Text>
                 </SafeAreaView>
             </SafeAreaView>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#FFE4C3',width:'100%',marginTop:10,paddingTop:10,paddingBottom:10}}>
+            <SafeAreaView style={{flexDirection:'row',backgroundColor:'#FFE4C3',marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
-                     <Text style={styles.rankings}>Tirrred(15%)</Text>
+                     <Text style={styles.rankings}>hobby(15%)</Text>
                 </SafeAreaView>
             </SafeAreaView>
 
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:'#FFE4C3',width:'100%',marginTop:10,paddingTop:10,paddingBottom:10}}>
+            <SafeAreaView style={{flexDirection:'row',backgroundColor:'#FFE4C3',marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
-                     <Text style={styles.rankings}>Lazy teddy bear(8%)</Text>
+                     <Text style={styles.rankings}>etc.(8%)</Text>
                 </SafeAreaView>
             </SafeAreaView>
             </ScrollView>
@@ -96,15 +97,14 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     dropdown: {
-        alignItems: 'flex-start',
         marginBottom: 10,
         marginLeft: '60%',
-        marginTop: 10,
+        marginTop: 20,
 
         paddingTop: 10,
         paddingBottom: 10,
-        paddingLeft: 10,
-        paddingRight: 5,
+        paddingLeft: 40,
+        paddingRight: 40,
         
         backgroundColor: '#FF991C',
         color: '#FFFFFF',
@@ -112,15 +112,25 @@ const styles = StyleSheet.create({
         fontWeight:'700',
     },
     best: {
-        fontSize:30,
+        fontSize:45,
         fontWeight:'700',
         color:'#FFFFFF',
         flex: 3,
     },
-    rankings: {
+    completionRate: {
+        alignItems: 'center',
+        flex: 1,
         fontSize:23,
         fontWeight:'700',
-        color:'#FFFFFF',
+        color: '#FFFFFF',
+        paddingTop: 3,
+        paddingBottom: 3,
+    },
+    rankings: {
+        flex: 1,
+        fontSize:23,
+        fontWeight:'700',
+        color:'#000000',
         paddingTop: 3,
         paddingBottom: 3,
     },
