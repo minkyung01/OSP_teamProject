@@ -55,7 +55,7 @@ const AddList = () => {
 
                 <SafeAreaView style={{flexDirection:'row'}}>
                     <Pressable>
-                        <Text style={{ backgroundColor: basicColor.itemBackground, fontSize:23,fontWeight:'700',paddingTop: 10,paddingBottom: 10, paddingLeft: '40%', paddingRight: '40%', margin: 20, marginTop: 40}}>add</Text>
+                        <Text style={{ backgroundColor: basicColor.itemBackground, fontSize:23,fontWeight:'700',paddingTop: 13,paddingBottom: 13, paddingLeft: '40%', paddingRight: '40%', margin: 20, marginTop: 40}}>add</Text>
                     </Pressable>
                 </SafeAreaView>
 
