@@ -30,7 +30,7 @@ const EditList = () => {
             ))}
             <SafeAreaView style={[styles.list,{backgroundColor: userContext.SkinColor.light}]}>
                 <SafeAreaView style={{margin:15}}>
-                    <IconButton type={iconImages.add } onPressOut={userContext._addList}/>
+                    <IconButton type={iconImages.add }/>
                 </SafeAreaView>
             </SafeAreaView>
         </ScrollView>
