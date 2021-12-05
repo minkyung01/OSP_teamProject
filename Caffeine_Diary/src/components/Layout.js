@@ -44,11 +44,12 @@ export const MainContents = () => {
         <View style={styles.mainContents}>
             <Category title="Today's Schedule" />
             <ScrollView>
-                {Object.values(userContext.Lists).reverse().map(listItem => (
+                {Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
-                            listItem.completed = !listItem.completed;
+                            listItem.
+                            completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext.setLists(currentLists);
                        }} page={"showList"}/>
