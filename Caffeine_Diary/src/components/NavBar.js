@@ -1,26 +1,51 @@
-import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, {useContext} from "react";
+import InfoContext from './InfoContext';
+import { View, StyleSheet, Text, SafeAreaView,Pressable } from "react-native";
 import { basicColor, themeColor } from '../colors';
+import TextButton from './TextButton';
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import NavBtn from "./NavBtn";
 
-const NavBar = ({menu}) => {
+/*
+const NavBar = () => {
+    const userContext = useContext(InfoContext);
     return (
-        <View style={styles.nav}>
-            <Text style={styles.textNav}>{menu}</Text>
-        </View>
+    <SafeAreaView style={[styles.nav,{backgroundColor: userContext.SkinColor.dark}]}>
+        <NavText text={"View" + "\n" + "TO-DO-LIST"} />
+        <NavText text={"My Page"} />
+        <NavText text={"Search"} />
+        <NavText text={"View" + "\n" + "Completion rate"} />
+    </SafeAreaView>
     );
 };
+const NavText = ({text}) => {
+    return(
+        <Pressable onPress={()=>{alert(text)}}>
+            <Text style={styles.textNav}>{text}</Text>
+        </Pressable>
+    );
+};
+*/
+
+const NavBar = () => {
+    const userContext = useContext(InfoContext);
+    return (
+        <SafeAreaView style={[styles.nav, {backgroundColor: userContext.SkinColor.dark}]}>
+            <NavBtn text={"      View\n    TO-DO\n      LIST"}/>
+            <NavBtn text={"My Page"}/>
+            <NavBtn text={"Search"}/>
+            <NavBtn text={"       View \n Completion\n       Rate"}/>
+        </SafeAreaView>
+    )
+}
 
 const styles = StyleSheet.create({
     nav: {
-        alignContent: 'center',
-        marginBottom: 10,
-    },
-    textNav: {
-        fontSize: 15,  
-        fontWeight: '700',
-        color: basicColor.background,
-        marginLeft: 32,
-        marginTop: 25,
+        flexDirection:'row',
+        width:'100%',
+        height:80,
+        justifyContent:'center',
+        alignItems:'center',
     },
 });
 
