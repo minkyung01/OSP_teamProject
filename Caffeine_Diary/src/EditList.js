@@ -28,7 +28,7 @@ const EditList = () => {
                     userContext.setLists(Object.values(userContext.Lists).filter(LIST=>LIST.date !== listItem.date));
                 }} page={"editList"}/>
             ))}
-            <SafeAreaView style={[styles.list,{backgroundColor: userContext.SkinColor.light}]}>
+            <SafeAreaView style={[styles.list,{backgroundColor: userContext.SkinColor.light,marginBottom:30}]}>
                 <SafeAreaView style={{margin:15}}>
                     <IconButton type={iconImages.add }/>
                 </SafeAreaView>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 20,
         marginTop: 20,
-        marginBottom: 20,
+        marginBottom:20,
     },
     list: {
         width: '80%',

@@ -16,6 +16,7 @@ import Edit from '../assets/pencil.png';
 import Lock from '../assets/lock.png';
 import Add from '../assets/plus.png';
 import Remove from '../assets/minus.png';
+import Search from '../assets/searchIcon.png';
 
 export const iconImages = {
     uncompleted: UncheckedBox,
@@ -29,6 +30,7 @@ export const iconImages = {
     remove: Remove,
     lock: Lock,
     share: Share,
+    search: Search,
 };
 export const stickerImages = [check, coffeeBean, Cake_1, Cake_2, Cake_3];
 export const levelImages = {
