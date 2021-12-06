@@ -10,10 +10,13 @@ import EditList from './EditList';
 import Ranking from './Ranking';
 import AddList from './AddList';
 import ListInfo from './ListInfo';
-
+import LoginScreen from './loginScreen';
+import SuccessScreen from './successScreen';
+import SignupScreen from './signupScreen';
 
 const App = () =>{
     const [id, setId] = useState('Ewha Kim');
+    const [password, setPassword] = useState('1886');
     const [attendance, setAttendance] = useState(100);
     const [skinColor, setSkinColor] = useState(themeColor.Orange);
     const [sort, setSort] = useState('closest'); // sort method
@@ -31,6 +34,7 @@ const App = () =>{
     });
     const userInfo={
         ID: id,
+        Password: password,
         Attendance: attendance,
         SkinColor: skinColor,
         Sort: sort,
@@ -50,10 +54,11 @@ const App = () =>{
         setSticker,
         setLists,
         setMode,
+        setPassword,
     };
     return(
         <InfoContext.Provider value={userInfo}>
-        <AppMain/>
+        <LoginScreen/>
         </InfoContext.Provider>
     );
 }

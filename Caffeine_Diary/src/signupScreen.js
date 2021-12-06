@@ -1,6 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-//import {basicColor,themeColor} from '../colors'
+import React, { useState, useContext } from "react";
+import InfoContext from './components/InfoContext';
+import {Pressable} from 'react-native';
+import Title from './components/Title';
+import {basicColor,themeColor} from './colors';
 import {
   StyleSheet,
   Text,
@@ -11,34 +14,36 @@ import {
   TouchableOpacity,
 } from "react-native";
  
-export default function App() {
-    const [email, setID] = useState("");
+const SignupScreen =() =>{
     const [password, setPassword] = useState("");
-   
+    const [name, setName] = useState("");
+    const [submit,setSubmit] = useState(false);
+    const userContext = useContext(InfoContext);
     const handleSubmitButton = () => {
-      setErrortext('');
-      if (!ID) {
-        alert('Please fill ID');
-        return;
+      if (name==='' ||password==='') {
+        alert('Please fill ID and Password');
       }
-      
-      if (!Password) {
-        alert('Please fill Password');
-        return;
+      else{
+        alert('back to sign in page');
+        userContext.setId(name);
+        userContext.setPassword(password);
+        setName('');
+        setPassword('');
       }
       
    }
     return (
       <View style={styles.container}>
-        <Image style={styles.image} source={require("../assets/coffee.png")} />  
+        <Title />
         <StatusBar style="auto" />
         <View style={styles.inputView}>
   
           <TextInput
             style={styles.TextInput}
             placeholder="ID:"
-            placeholderTextColor="#000000" //basicColor.text
-            onChangeText={(Name) => setName(Name)}
+            placeholderTextColor={basicColor.text}
+            onChangeText={(name) => setName(name)}
+            value={name}
           />
         </View>
    
@@ -50,17 +55,18 @@ export default function App() {
           placeholderTextColor="#000000" //basicColor.text
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
+          value={password}
         />
       </View>
  
-      <TouchableOpacity style={styles.signup_Btn}>
-        <Text style={styles.signup_Btn}>Sign Up</Text>
-      </TouchableOpacity>
+      <Pressable style={styles.signup_Btn} onPress={handleSubmitButton}>
+        <Text>Sign Up</Text>
+      </Pressable>
 
       
     </View>
   );
-}
+};
  
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
     width: "70%",
     height: 45,
     marginBottom: 20,
- 
+
     alignItems: "center",
   },
  
@@ -88,7 +94,8 @@ const styles = StyleSheet.create({
     height: 50,
     flex: 1,
     padding: 10,
-    marginLeft: 20,
+    alignSelf:'center',
+
   },
  
   signup_Btn: {
@@ -98,12 +105,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "#FF991C", //themeColor.Orange.dark
+    backgroundColor: themeColor.Orange.dark,
   },
   
 });
 
-export default signupScreen;
+export default SignupScreen;
 /*if (isRegistraionSuccess) {
     return (
       <View

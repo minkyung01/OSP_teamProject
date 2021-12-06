@@ -1,6 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-//import {basicColor,themeColor} from '../colors'
+import React, { useState,useContext } from "react";
+import {Pressable} from "react-native";
+import InfoContext from './components/InfoContext';
+import Title from './components/Title';
+import {basicColor,themeColor} from './colors'
 import {
   StyleSheet,
   Text,
@@ -11,34 +14,37 @@ import {
   TouchableOpacity,
 } from "react-native";
  
-export default function App() {
-  const [email, setID] = useState("");
+const LoginScreen = () => {
+  const [name,setName] = useState("");
   const [password, setPassword] = useState("");
- 
-  const handleSubmitButton = () => {
-    setErrortext('');
-    if (!ID) {
-      alert('Please fill ID');
-      return;
-    }
-    
-    if (!Password) {
-      alert('Please fill Password');
-      return;
-    }
-    
- }
+  const userContext = useContext(InfoContext);
+    const handleSubmitButton = () => {
+      if (name==='' ||password==='') {
+        alert('Please fill ID and Password');
+      }
+      else{
+        if(name===userContext.ID && password===userContext.Password)
+            alert('go to main page');
+        else
+            alert('Invalid ID and Password');
+        setName('');
+        setPassword('');
+      }
+
+   }
+
+
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/coffee.png")} />  
+      <Title />
       <StatusBar style="auto" />
       <View style={styles.inputView}>
-
         <TextInput
           style={styles.TextInput}
           placeholder="ID:"
           placeholderTextColor="#000000" //basicColor.text
           onChangeText={(Name) => setName(Name)}
+          value={name}
         />
       </View>
  
@@ -49,21 +55,23 @@ export default function App() {
           placeholderTextColor="#000000" //basicColor.text
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
+          value = {password}
         />
       </View>
  
-      <TouchableOpacity style={styles.loginBtn}>
+      <Pressable style={styles.loginBtn} onPress={handleSubmitButton}>
         <Text style={styles.loginText}>Sign In</Text>
-      </TouchableOpacity>
+      </Pressable>
 
       
 
-      <TouchableOpacity style={styles.signup_Btn}>
-        <Text style={styles.signup_Btn}>Sign Up</Text>
-      </TouchableOpacity>
+      <Pressable style={styles.signup_Btn}
+      onPress={()=>{alert('go to sign up page')}}>
+        <Text style={styles.loginText}>Sign Up</Text>
+      </Pressable>
     </View>
   );
-}
+};
  
 const styles = StyleSheet.create({
   container: {
@@ -104,10 +112,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF991C", //themeColor.Orange.dark
   },
   signup_Btn: {
-    height: 30,
-    marginBottom: 30,
+    backgroundColor:themeColor.Orange.light,
+    borderRadius: 25,
+    width: '80%',
+    height:50,
+    margin: 10,
+    alignItems:'center',
+    justifyContent: "center",
   },
   
 });
 
-export default loginScreen;
+export default LoginScreen;

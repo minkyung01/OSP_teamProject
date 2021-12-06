@@ -11,31 +11,34 @@ import {
   TouchableOpacity,
 } from "react-native";
  
-export default function App() {
+const SuccessScreen=()=> {
  
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require("../assets/checkBox.png")} />  
       <StatusBar style="auto" />
-
       <TouchableOpacity style={styles.signin_Btn}>
-        <Text style={styles.signin_Btn}>Sign In</Text>
+        <Text style={{fontSize:50,alignSelf:'center'}}>Sign In</Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
  
 const styles = StyleSheet.create({
- 
- 
+ container:{
+    alignItems:'center',
+    marginBottom:'auto',
+    marginTop:'auto',
+ },
   image: {
     marginBottom: 40,
+    alignSelf:'center',
+    margin:30,
   },
  
   signin_Btn: {
-    height: 30,
     marginBottom: 30,
   },
 
 });
-export default successScreen;
+export default SuccessScreen;
