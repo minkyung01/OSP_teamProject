@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import InfoContext from './InfoContext';
-import { StyleSheet, Text, View, ScrollView, Image,Pressable } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, ScrollView, Image,Pressable } from "react-native";
 import { basicColor, themeColor } from "../colors";
 import { iconImages } from '../../src/images';
 import IconButton from './IconButton';
@@ -10,7 +10,7 @@ import Category from "./Category";
 import List from "./List";
 import NavBar from "./NavBar";
 import SelectBtn from "./SelectBtn";
-import CategoryBtn from "./CategoryBtn";
+import {Picker} from '@react-native-picker/picker';
 
 export const Header = () => {
     return (
@@ -19,29 +19,38 @@ export const Header = () => {
         </View>
     );
 };
-export const SubContents = () => {
+export const Contents = () => {
     const userContext = useContext(InfoContext);
+    const [item,setItem] = useState('today');
     return (
-        <View style={[styles.subContents, {flexDirection: 'row',alignItems:'center'}]}>
-            <CategoryBtn category="category" />
-            <SelectBtn />
+    <View>
+        <View style={[{flexDirection: 'row',alignItems:'center',justifyContent:'space-between',marginBottom:10}]}>
+        <SafeAreaView style={[styles.button,{backgroundColor:userContext.SkinColor.light}]}>
+            <Picker
+                style={{width:160}}
+                selectedValue={item}
+                onValueChange={(val,idx)=> {
+                setItem(val);}
+             }>
+             <Picker.Item style={styles.buttonText} label="Today" value={"today"} />
+             <Picker.Item style={styles.buttonText} label="Assignment" value={"assignment"} />
+             <Picker.Item style={styles.buttonText} label="Lecture" value={"lecture"} />
+             <Picker.Item style={styles.buttonText} label="Hobby" value={"hobby"} />
+             <Picker.Item style={styles.buttonText} label="etc." value={"etc."} />
+             <Picker.Item style={styles.buttonText} label="Completed" value={"completed"} />
+             <Picker.Item style={styles.buttonText} label="Uncompleted" value={"uncompleted"} />
+           </Picker>
+        </SafeAreaView>
+
             <View style={styles.edit}>
+                <SelectBtn/>
                 <IconButton type={iconImages.edit} page={"EditList"}/>
             </View>
         </View>
-    );
-};
-
-//CategoryBtn의 category와 Category의 title 일치시키기
-
-export const MainContents = () => {
-    const userContext = useContext(InfoContext);
-
-    return (
-        <View style={styles.mainContents}>
-            <Category title="Today's Schedule" />
-            <ScrollView>
-                {Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).map(listItem => (
+        <Category title="Today's Schedule" />
+        <ScrollView style={{height:'54%'}}>
+                {(item==='today')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
@@ -49,8 +58,68 @@ export const MainContents = () => {
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext.setLists(currentLists);
                        }} page={"showList"}/>
-                ))}
-            </ScrollView>
+                )))}
+                {(item==='assignment')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='assignment').map(listItem => (
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext.setLists(currentLists);
+                       }} page={"showList"}/>
+                )))}
+                {(item==='hobby')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='hobby').map(listItem => (
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext.setLists(currentLists);
+                       }} page={"showList"}/>
+                )))}
+                {(item==='lecture')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='lecture').map(listItem => (
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext.setLists(currentLists);
+                       }} page={"showList"}/>
+                )))}
+                {(item==='etc.')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='etc.').map(listItem => (
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext.setLists(currentLists);
+                       }} page={"showList"}/>
+                )))}
+                {(item==='completed')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.completed===true).map(listItem => (
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext.setLists(currentLists);
+                       }} page={"showList"}/>
+                )))}
+                {(item==='uncompleted')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.completed===false).map(listItem => (
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext.setLists(currentLists);
+                       }} page={"showList"}/>
+                )))}
+        </ScrollView>
         </View>
     );
 };
@@ -71,7 +140,6 @@ const styles = StyleSheet.create({
         backgroundColor: basicColor.background,
     },
     mainContents: {
-        flex: 18,
         backgroundColor: basicColor.background,
     },
     title: {
@@ -126,6 +194,21 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     edit: {
-        marginLeft: 10,
+        paddingRight:'10%',
+        flexDirection:'row',
+    },
+    button: {
+        width: 160,
+        height: 40,
+        borderRadius: 10,
+        marginLeft: 40,
+        paddingBottom: 3,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonText: {
+        fontSize: 15,
+        fontWeight: '700',
+        color: basicColor.text,
     },
 });
