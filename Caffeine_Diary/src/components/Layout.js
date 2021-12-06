@@ -126,6 +126,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     edit: {
-        marginLeft: 10,n
+        marginLeft: 10,
     },
 });

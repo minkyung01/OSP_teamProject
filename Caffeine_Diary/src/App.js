@@ -58,7 +58,7 @@ const App = () =>{
     };
     return(
         <InfoContext.Provider value={userInfo}>
-        <LoginScreen/>
+        <AddList/>
         </InfoContext.Provider>
     );
 }

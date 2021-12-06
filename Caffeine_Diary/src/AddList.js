@@ -10,13 +10,15 @@ const AddList = () => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
     const YEAR = new Date().getFullYear(); // Current year Constant
+    const MONTH = new Date().getMonth()+10; // Current month Constant
+    const DAY = new Date().getDate()+10; // Current day Constant
     const [todo,setTodo] = useState(''); // title of Schedule
     const [year,setYear] = useState(new Date().getFullYear().toString()); // deadline => year
     const [month,setMonth] = useState((new Date().getMonth()+10).toString()); // deadline => month
     const [day,setDay] = useState((new Date().getDate()+10).toString()); // deadline => day
     const [now,setNow] = useState(new Date().getFullYear().toString()+(new Date().getMonth()+10).toString()+(new Date().getDate()+10).toString());
     const [category, setCategory] = useState('assignment'); // category of Schedule
-    const [comment, setComment] = useState('') // comment of Schedule
+    const [comment, setComment] = useState(''); // comment of Schedule
     class date extends Component{ // calculate date
         state={
             now: new Date()
@@ -150,6 +152,12 @@ const AddList = () => {
             if(parseInt(Deadline)>=parseInt(now)){
                 userContext.setLists({...userContext.Lists, ...newListObject});
                 alert('The schedule has been added successfully.');
+                setTodo('');
+                setYear(YEAR);
+                setMonth(MONTH);
+                setDay(DAY);
+                setCategory('assignment');
+                setComment('');
             }
             else{
                 alert("Invalid deadline. Please enter the proper schedule information.");
@@ -173,7 +181,7 @@ const AddList = () => {
                     <Text style={styles.greyBox}>Title</Text>
                     <SafeAreaView style={styles.container}>
                         <TextInput style={styles.input} placeholder={"Please enter a schedule."}
-                        onChangeText={text=>setTodo(text)}></TextInput>
+                        onChangeText={text=>setTodo(text)} value={todo}></TextInput>
                     </SafeAreaView>
                 </SafeAreaView>
 
@@ -192,7 +200,8 @@ const AddList = () => {
                     <SafeAreaView style={styles.comment}>
                         <TextInput style={{backgroundColor: basicColor.background, width: '90%', fontSize:20, fontWeight:'400',padding: 5}}
                         placeholder={"Please enter a comment."}
-                        onChangeText={text=>setComment(text)}>
+                        onChangeText={text=>setComment(text)}
+                        value={comment}>
                         </TextInput>
                     </SafeAreaView>
                 </SafeAreaView>

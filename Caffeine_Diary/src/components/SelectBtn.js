@@ -26,7 +26,7 @@ const SelectBtn = () =>{
             <Text 
                 style={{color:(isTouch? basicColor.pointText : basicColor.text),
                         fontWeight: (isTouch? '700' : '500'), 
-                        border: (isTouch? basicColor.pointText : basicColor.text)}}>
+                        }}>
                 select all
                 </Text>
         </Pressable>

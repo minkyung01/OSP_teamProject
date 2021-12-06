@@ -140,7 +140,7 @@ const Ranking = () => {
             <SafeAreaView style={{flexDirection:'row', backgroundColor:userContext.SkinColor.dark,marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
                      {(userContext.Mode==='today')&&(<Text style={styles.completionRate}>{year} . {month+1} . {day}</Text>)}
-                     {(userContext.Mode==='this week')&&(<Text style={styles.completionRate}>{weekYear}.{weekMonth+1}.{weekDay} ~ {year} . {month+1} . {day}</Text>)}
+                     {(userContext.Mode==='this week')&&(<Text style={styles.completionRate}>{weekYear}.{weekMonth+1}.{weekDay} (Mon) ~ {year}.{month+1}.{day}</Text>)}
                      {(userContext.Mode==='this month')&&(<Text style={styles.completionRate}>{Month[month]} .</Text>)}
                 </SafeAreaView>
             </SafeAreaView>
