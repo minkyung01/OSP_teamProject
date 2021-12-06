@@ -2,7 +2,7 @@ import React,{useContext, useState,Component} from 'react';
 import {StatusBar, SafeAreaView, View,Text, StyleSheet, Image, ScrollView, Dimensions, Pressable} from 'react-native';
 import { basicColor } from './colors';
 import { textStyles } from './styles';
-import {levelImages} from './images';
+import {levelImages, iconImages} from './images';
 import InfoContext from './components/InfoContext';
 import {Picker} from '@react-native-picker/picker';
 
@@ -56,8 +56,11 @@ const Ranking = () => {
                     <Text style={styles.title}>{userContext.ID}'s</Text>
                     <Text style={styles.text}>completion rate</Text>
                 </SafeAreaView>
+            {(start)&&(
+            <Pressable style={{marginLeft:'auto',marginRight:10}} onPress={()=>alert('share')}>
+                <Image source={iconImages.share} style={{width:40,height:40}} />
+            </Pressable>)}
             </SafeAreaView>
-
             <SafeAreaView style={{justifyContent:'space-between',flexDirection:'row'}}>
                     <Pressable
                         style={[styles.dropdown,{backgroundColor:userContext.SkinColor.dark,width:120}]}

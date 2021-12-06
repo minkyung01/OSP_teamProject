@@ -17,7 +17,6 @@ import Lock from '../assets/lock.png';
 import Add from '../assets/plus.png';
 import Remove from '../assets/minus.png';
 
-
 export const iconImages = {
     uncompleted: UncheckedBox,
     completed: CheckedBox,
@@ -29,6 +28,7 @@ export const iconImages = {
     add:Add,
     remove: Remove,
     lock: Lock,
+    share: Share,
 };
 export const stickerImages = [check, coffeeBean, Cake_1, Cake_2, Cake_3];
 export const levelImages = {
