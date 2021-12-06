@@ -12,8 +12,7 @@ import AmericanoIcon from '../assets/coffee.png';
 import Share from '../assets/shared.png';
 import Up from '../assets/up.png';
 import Down from '../assets/down.png';
-import Edit from '../assets/edit.png';
-import Search from './Search';
+import Edit from '../assets/pencil.png';
 
 export const iconImages = {
     uncompleted: UncheckedBox,
@@ -23,7 +22,6 @@ export const iconImages = {
     up: Up,
     down: Down,
     edit: Edit,
-    search: Search,
 };
 export const levelImages = {
     Water: WaterIcon,

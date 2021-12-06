@@ -8,7 +8,6 @@ export const SkinColor = "Orange";
 export const Sort = "closest";
 export const CheckSticker = LevelSticker()[0];
 export const LevelGroupSticker = LevelSticker();
-export const Achievement = 0;
 
 function levelUp(){
     if(Attendance<21)
