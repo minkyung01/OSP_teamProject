@@ -13,6 +13,7 @@ import ListInfo from './ListInfo';
 import LoginScreen from './loginScreen';
 import SuccessScreen from './successScreen';
 import SignupScreen from './signupScreen';
+import Search from './Search';
 
 const App = () =>{
     const [id, setId] = useState('Ewha Kim');
@@ -58,7 +59,7 @@ const App = () =>{
     };
     return(
         <InfoContext.Provider value={userInfo}>
-        <AddList/>
+        <AppMain/>
         </InfoContext.Provider>
     );
 }

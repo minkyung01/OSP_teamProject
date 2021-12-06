@@ -3,6 +3,7 @@ import {StatusBar, SafeAreaView,Pressable, View,Text, StyleSheet, Image, TextInp
 import {basicColor, themeColor} from './colors';
 import { iconImages } from './images';
 import { textStyles } from './styles';
+import Title from './components/Title';
 
 const Search = () => {
     const width = Dimensions.get('window').width;
@@ -10,10 +11,7 @@ const Search = () => {
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
             <ScrollView width = {width-20} height = '80%'>
-            <SafeAreaView style={{flexDirection:'row',alignItems:'center',margin:10}}>
-                <Image style={styles.coffee} source={require('./../assets/coffee.png')} />
-                <Text style={styles.title}>TO-DO-LIST</Text>
-            </SafeAreaView>
+            <Title />
 
             <SafeAreaView style={{flexDirection: 'row',backgroundColor:themeColor.Orange.dark}}>
             <Pressable>
