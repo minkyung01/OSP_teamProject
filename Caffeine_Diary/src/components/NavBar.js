@@ -3,15 +3,18 @@ import InfoContext from './InfoContext';
 import { View, StyleSheet, Text, SafeAreaView,Pressable } from "react-native";
 import { basicColor, themeColor } from '../colors';
 import TextButton from './TextButton';
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import NavBtn from "./NavBtn";
 
+/*
 const NavBar = () => {
     const userContext = useContext(InfoContext);
     return (
     <SafeAreaView style={[styles.nav,{backgroundColor: userContext.SkinColor.dark}]}>
-        <NavText text={"      View" + "\n" + "TO-DO-LIST"} />
+        <NavText text={"View" + "\n" + "TO-DO-LIST"} />
         <NavText text={"My Page"} />
         <NavText text={"Search"} />
-        <NavText text={"  View" + "\n" + "Ranking"} />
+        <NavText text={"View" + "\n" + "Completion rate"} />
     </SafeAreaView>
     );
 };
@@ -22,6 +25,20 @@ const NavText = ({text}) => {
         </Pressable>
     );
 };
+*/
+
+const NavBar = () => {
+    const userContext = useContext(InfoContext);
+    return (
+        <SafeAreaView style={[styles.nav, {backgroundColor: userContext.SkinColor.dark}]}>
+            <NavBtn text={"      View\n    TO-DO\n      LIST"}/>
+            <NavBtn text={"My Page"}/>
+            <NavBtn text={"Search"}/>
+            <NavBtn text={"       View \n Completion\n       Rate"}/>
+        </SafeAreaView>
+    )
+}
+
 const styles = StyleSheet.create({
     nav: {
         flexDirection:'row',
@@ -29,15 +46,6 @@ const styles = StyleSheet.create({
         height:80,
         justifyContent:'center',
         alignItems:'center',
-        padding: 15,
-
-    },
-    textNav: {
-        fontSize: 18,
-        fontWeight: '700',
-        color: basicColor.background,
-        paddingRight:10,
-        paddingLeft:10,
     },
 });
 

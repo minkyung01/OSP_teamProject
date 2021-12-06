@@ -9,6 +9,8 @@ import Title from './Title';
 import Category from "./Category";
 import List from "./List";
 import NavBar from "./NavBar";
+import SelectBtn from "./SelectBtn";
+import CategoryBtn from "./CategoryBtn";
 
 export const Header = () => {
     return (
@@ -21,21 +23,16 @@ export const SubContents = () => {
     const userContext = useContext(InfoContext);
     return (
         <View style={[styles.subContents, {flexDirection: 'row',alignItems:'center'}]}>
-            <Pressable style={[styles.category,{backgroundColor: userContext.SkinColor.dark,}]}><Text style={{color: basicColor.background,fontWeight: '700',fontSize: 15,}}>
-            category</Text></Pressable>
-            <View style={styles.share}>
-                <IconButton type={iconImages.share} />
-            </View>
-            <Text style={styles.select}>select all</Text>
-            <View style={styles.uc_box}>
-                <IconButton type={iconImages.uncompleted} />
-            </View>
+            <CategoryBtn category="category" />
+            <SelectBtn />
             <View style={styles.edit}>
                 <IconButton type={iconImages.edit} page={"EditList"}/>
             </View>
         </View>
     );
 };
+
+//CategoryBtn의 category와 Category의 title 일치시키기
 
 export const MainContents = () => {
     const userContext = useContext(InfoContext);
@@ -48,8 +45,7 @@ export const MainContents = () => {
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
-                            listItem.
-                            completed = !listItem.completed;
+                            listItem.completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext.setLists(currentLists);
                        }} page={"showList"}/>
@@ -130,6 +126,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     edit: {
-        marginLeft: 10,
+        marginLeft: 10,n
     },
 });

@@ -17,6 +17,7 @@ import Lock from '../assets/lock.png';
 import Add from '../assets/plus.png';
 import Remove from '../assets/minus.png';
 
+
 export const iconImages = {
     uncompleted: UncheckedBox,
     completed: CheckedBox,

@@ -1,30 +1,8 @@
 import React, { useState } from 'react';
-import {SafeAreaView, Text, StyleSheet, Image, View} from 'react-native';
+import {SafeAreaView, Text, StyleSheet, Image, View, ScrollView} from 'react-native';
 import { basicColor, themeColor } from './colors';
 
 import { Header, SubContents, MainContents, Footer } from './components/Layout';
-
-/*
-const AppMain = () => {
-    
-    return (
-        <SafeAreaView style={styles.basic}>
-            <Header>  
-            </Header>
-
-            <SubContents>
-            </SubContents>
-
-            <MainContents>    
-            </MainContents>
-
-            <Footer>
-            </Footer>
-        </SafeAreaView>
-    );
-};
-*/
-
 
 function AppMain() {
 
@@ -51,6 +29,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: basicColor.background,
         marginTop: '10%',
+    },
+    container: {
+        paddingTop:20,
+        marginTop: 20,
+        marginBottom: 20,
     },
 });
 
