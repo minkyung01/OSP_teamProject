@@ -48,7 +48,7 @@ export const Contents = () => {
             </View>
         </View>
         <Category title="Today's Schedule" />
-        <ScrollView style={{height:'52.5%'}}>
+        <ScrollView style={{height:'54%'}}>
                 {(item==='today')&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).map(listItem => (
                     <List key={listItem.date}
