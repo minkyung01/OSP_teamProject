@@ -132,9 +132,9 @@ const AddList = () => {
                          <Picker.Item style={{fontSize:20}} label="26" value={"26"} />
                          <Picker.Item style={{fontSize:20}} label="27" value={"27"} />
                          <Picker.Item style={{fontSize:20}} label="28" value={"28"} />
-                         <Picker.Item style={{fontSize:20}} label="29" value={"29"} />
-                         <Picker.Item style={{fontSize:20}} label="30" value={"30"} />
-                         <Picker.Item style={{fontSize:20}} label="31" value={"31"} />
+                         {((year%4==0)&&(year%100!=0)||(year%400==0))&&(<Picker.Item style={{fontSize:20}} label="29" value={"29"} />)}
+                         {(month!=11)&&(<Picker.Item style={{fontSize:20}} label="30" value={"30"} />)}
+                         {(month==10||month==12||month==14||month==16||month==17||month==19||month==21)&&(<Picker.Item style={{fontSize:20}} label="31" value={"31"} />)}
                      </Picker>
                  </View>
              );
