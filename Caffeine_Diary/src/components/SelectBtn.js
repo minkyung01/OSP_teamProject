@@ -25,7 +25,8 @@ const SelectBtn = () =>{
         >
             <Text 
                 style={{color:(isTouch? basicColor.pointText : basicColor.text),
-                        fontWeight: (isTouch? '700' : '500'), 
+                        fontWeight: (isTouch? '700' : '500'),
+                        fontSize:18,
                         }}>
                 select all
                 </Text>
@@ -47,10 +48,9 @@ const checkAll = () => {
 
 const styles = StyleSheet.create({
     button: {
-        marginLeft: 140,
-        padding: 2,
-        fontSize: 15,
+        padding: 5,
         borderWidth: 2,
+        marginRight:10,
     },
 });
 
