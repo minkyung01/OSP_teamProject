@@ -7,11 +7,11 @@ import BackArrow from './components/BackArrow';
 import ColorBtn from './components/ColorBtn';
 import StickerBtn from './components/StickerBtn';
 
-const Stickers_and_Skins = () => {
+const Stickers_and_Skins = ({navigation}) => {
     const userContext = useContext(InfoContext);
     return(
         <ScrollView style={styles.container}>
-            <BackArrow />
+            <BackArrow navigation={navigation}/>
             <SafeAreaView style={{flexDirection:'row', alignItems:'center'}}>
                 <Image
                     style={(()=>{

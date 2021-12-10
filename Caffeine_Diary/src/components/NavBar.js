@@ -27,14 +27,14 @@ const NavText = ({text}) => {
 };
 */
 
-const NavBar = () => {
+const NavBar = ({navigation}) => {
     const userContext = useContext(InfoContext);
     return (
         <SafeAreaView style={[styles.nav, {backgroundColor: userContext.SkinColor.dark}]}>
-            <NavBtn text={"      View\n    TO-DO\n      LIST"}/>
-            <NavBtn text={"My Page"}/>
-            <NavBtn text={"Search"}/>
-            <NavBtn text={"       View \n Completion\n       Rate"}/>
+            <NavBtn text={"      View\n    TO-DO\n      LIST"} onPressOut={()=>navigation.push('Main')}/>
+            <NavBtn text={"My Page"} onPressOut={()=>navigation.push('MyPage')}/>
+            <NavBtn text={"Search"} onPressOut={()=>navigation.push('Search')}/>
+            <NavBtn text={"       View \n Completion\n       Rate"} onPressOut={()=>navigation.push('Completion')}/>
         </SafeAreaView>
     )
 }

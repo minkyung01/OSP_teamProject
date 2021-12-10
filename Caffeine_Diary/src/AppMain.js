@@ -4,17 +4,17 @@ import { basicColor, themeColor } from './colors';
 
 import { Header, Contents, Footer } from './components/Layout';
 
-function AppMain() {
+const AppMain = ({navigation})=> {
 
     return (
         <SafeAreaView style={styles.basic}>
             <Header>  
             </Header>
 
-            <Contents>
+            <Contents navigation={navigation}>
             </Contents>
 
-            <Footer>
+            <Footer navigation={navigation}>
             </Footer>
         </SafeAreaView>
     );

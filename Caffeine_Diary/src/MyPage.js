@@ -5,12 +5,14 @@ import {basicColor,themeColor} from './colors';
 import TextButton from './components/TextButton';
 import SortButton from './components/SortButton';
 import {levelImages, iconImages, stickerImages} from './images';
-
-const MyPage = () => {
+import NavBar from './components/NavBar';
+const MyPage = ({navigation}) => {
     const userContext = useContext(InfoContext);
     return(
+    <SafeAreaView >
+    <SafeAreaView style={{height:'89.2%',paddingBottom:10}}>
         <ScrollView style={styles.container}>
-           <TextButton text="Log Out" />
+           <TextButton text="Log Out" navigation={navigation}/>
            <SafeAreaView style={styles.box1}>
             <Text style={{
                 fontSize: 40,
@@ -60,7 +62,7 @@ const MyPage = () => {
                 <Text style={styles.title}>Choose check sticker/theme color</Text>
                 <SafeAreaView style={styles.box1}>
                     <Text style={styles.title}>of {userContext.LevelName[userContext.Level]} level</Text>
-                    <TextButton text="more" />
+                    <TextButton text="more" id="s" navigation={navigation}/>
                 </SafeAreaView>
                 <SafeAreaView style={styles.box1}>
                     <SafeAreaView style={{backgroundColor:userContext.SkinColor.dark,width:80,height:80, margin:10}}></SafeAreaView>
@@ -72,16 +74,19 @@ const MyPage = () => {
             <Text style={styles.title}>Want To Level Up?</Text>
             <SafeAreaView style={styles.box1}>
                 <Text style={styles.title}>Increase Attendance!</Text>
-                <TextButton text="more" />
+                <TextButton text="more" id="a" navigation={navigation}/>
             </SafeAreaView>
            </SafeAreaView>
 
-           <SafeAreaView style={{marginTop: 30}}>
+           <SafeAreaView style={{marginTop: 30,marginBottom:20}}>
             <Text style={styles.title}>How to list-up?</Text>
-           </SafeAreaView>
             <SortButton text="show the closest due date first" method="closest"/>
-            <SortButton text="show the latest added date first" method="latest"/>
+            <SortButton text="show the latest added date first" method="latest" />
+        </SafeAreaView>
         </ScrollView>
+        </SafeAreaView>
+        <NavBar navigation={navigation}/>
+    </SafeAreaView>
     );
 };
 

@@ -5,13 +5,17 @@ import {basicColor} from './colors';
 import { viewStyles, textStyles } from './styles';
 import {Picker} from '@react-native-picker/picker';
 import BackArrow from './components/BackArrow';
+import TextButton from './components/TextButton';
 
-const AddList = () => {
+const AddList = ({navigation}) => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
     const YEAR = new Date().getFullYear(); // Current year Constant
     const MONTH = new Date().getMonth()+10; // Current month Constant
     const DAY = new Date().getDate()+10; // Current day Constant
+    const YEAR_str = new Date().getFullYear().toString(); // Current year Constant
+    const MONTH_str = (new Date().getMonth()+10).toString(); // Current month Constant
+    const DAY_str = (new Date().getDate()+10).toString(); // Current day Constant
     const [todo,setTodo] = useState(''); // title of Schedule
     const [year,setYear] = useState(new Date().getFullYear().toString()); // deadline => year
     const [month,setMonth] = useState((new Date().getMonth()+10).toString()); // deadline => month
@@ -150,7 +154,7 @@ const AddList = () => {
         };
         (()=>{ //Check whether the deadline is ahead of the current date.
             if(parseInt(Deadline)>=parseInt(now)){
-                userContext.setLists({...userContext.Lists, ...newListObject});
+                userContext._setLists({...userContext.Lists, ...newListObject});
                 alert('The schedule has been added successfully.');
                 setTodo('');
                 setYear(YEAR);
@@ -158,6 +162,10 @@ const AddList = () => {
                 setDay(DAY);
                 setCategory('assignment');
                 setComment('');
+                if(userContext.Attendance==0||userContext.LastAttendance<YEAR_str+MONTH_str+DAY_str){ // 오늘 처음 스케줄을 추가한 경우
+                    userContext._setAttendance(userContext.Attendance+1); // 출석일수 +=1
+                    userContext._setLastAttendance(YEAR_str+MONTH_str+DAY_str) // 오늘 날짜 -> 마지막 출석일로 저장
+                }
             }
             else{
                 alert("Invalid deadline. Please enter the proper schedule information.");
@@ -170,7 +178,10 @@ const AddList = () => {
         <ScrollView>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
                 <SafeAreaView style={{paddingTop: 20,marginTop: 20,marginBottom: 20}}>
-                    <BackArrow />
+                    <SafeAreaView style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                        <TextButton text="go to Main" navigation={navigation}/>
+                        <BackArrow navigation={navigation}/>
+                    </SafeAreaView>
                     <SafeAreaView style={{alignItems:'center'}}>
                         <Text style={styles.title}>Add new schedule to</Text>
                         <Text style={styles.title}>TO-DO-LIST</Text>

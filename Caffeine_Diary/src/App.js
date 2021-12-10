@@ -14,25 +14,116 @@ import LoginScreen from './loginScreen';
 import SuccessScreen from './successScreen';
 import SignupScreen from './signupScreen';
 import Search from './Search';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo-app-loading';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const App = () =>{
-    const [id, setId] = useState('Ewha Kim');
-    const [password, setPassword] = useState('1886');
-    const [attendance, setAttendance] = useState(100);
+    const [isReady, setIsReady] = useState(false);
+    const [id, setId] = useState();
+    const [password, setPassword] = useState();
+    const [attendance, setAttendance] = useState();
+    const [LastAttendance, setLastAttendance] = useState('');
     const [skinColor, setSkinColor] = useState(themeColor.Orange);
-    const [sort, setSort] = useState('closest'); // sort method
-    const [sticker,setSticker] = useState(0); // check sticker type(0~4)
+    const [sort, setSort] = useState(); // sort method
+    const [sticker,setSticker] = useState(); // check sticker type(0~4)
     const [mode,setMode] = useState('option'); //completion rate mode
-    const [lists, setLists] = useState({ /*date: 현재 date, todo: 할일내용, category:카테고리, comment: 메모, completed: 끝남여부*/
-        '202121158548': {date: '202121158548', todo: "test #1", deadline:"20222116",category:"assignment",comment:"first Test",completed: false},
-        '202121158520': {date: '202121158520', todo: "test #2", deadline:"20232120",category:"assignment",comment:"second Test",completed: false},
-        '202121158510': {date: '202121158510', todo: "test #3", deadline:"20242120",category:"assignment",comment:"second Test",completed: true},
-        '202120308570': {date: '202121308570', todo: "test #4", deadline:"20252120",category:"lecture",comment:"second Test",completed: true},
-        '202121128530': {date: '202121128530', todo: "test #5", deadline:"20262120",category:"hobby",comment:"second Test",completed: false},
-        '202120408530': {date: '202120408530', todo: "test #6", deadline:"20272120",category:"hobby",comment:"second Test",completed: true},
-        '202121148520': {date: '202121148520', todo: "test #7", deadline:"20282120",category:"etc.",comment:"second Test",completed: false},
+    const [lists, setLists] = useState(); /*date: 현재 date, todo: 할일내용, category:카테고리, comment: 메모, completed: 끝남여부*/
+    const [keepSignIn, setKeepSignIn] = useState(false);
+    const _loadInfo = async () => {
+        const loadedId = await AsyncStorage.getItem('id');
+        const loadedPassword = await AsyncStorage.getItem('password');
+        const loadedAttendance = await AsyncStorage.getItem('attendance');
+        const loadedSkinColor = await AsyncStorage.getItem('skinColor');
+        const loadedSort = await AsyncStorage.getItem('sort');
+        const loadedLists = await AsyncStorage.getItem('lists');
+        const loadedCheckSticker = await AsyncStorage.getItem('sticker');
+        const loadedKeepSignIn = await AsyncStorage.getItem('keepSignIn');
+        const loadedLastAttendance = await AsyncStorage.getItem('LastAttendance');
 
-    });
+        setId(JSON.parse(loadedId||''));
+        setPassword(JSON.parse(loadedPassword||''));
+        setAttendance(JSON.parse(loadedAttendance||0));
+        setSort(JSON.parse(loadedSort||'closest'));
+        setSkinColor(JSON.parse(loadedSkinColor||themeColor.Orange));
+        setLists(JSON.parse(loadedLists||'{}'));
+        setSticker(JSON.parse(loadedCheckSticker||0));
+        setKeepSignIn(JSON.parse(loadedKeepSignIn||false));
+        setLastAttendance(JSON.parse(loadedLastAttendance||''));
+    }
+    const _setId = async id => {
+        try{
+            await AsyncStorage.setItem('id',JSON.stringify(id));
+            setId(id);
+        }catch (e){
+            console.error(e);
+        }
+    };
+    const _setPassword = async password => {
+        try{
+            await AsyncStorage.setItem('password',JSON.stringify(password));
+            setPassword(password);
+        }catch (e){
+            console.error(e);
+        }
+    };
+    const _setAttendance = async attendance => {
+        try{
+            await AsyncStorage.setItem('attendance',JSON.stringify(attendance));
+            setAttendance(attendance);
+        }catch (e){
+            console.error(e);
+        }
+    };
+    const _setSkinColor = async skinColor => {
+        try{
+            await AsyncStorage.setItem('skinColor',JSON.stringify(skinColor));
+            setSkinColor(skinColor);
+        }catch (e){
+            console.error(e);
+        }
+    };
+    const _setSort = async sort => {
+        try{
+            await AsyncStorage.setItem('sort',JSON.stringify(sort));
+            setSort(sort);
+        }catch (e){
+            console.error(e);
+        }
+    };
+    const _setLists = async lists => {
+        try{
+            await AsyncStorage.setItem('lists',JSON.stringify(lists));
+            setLists(lists);
+        }catch (e){
+            console.error(e);
+        }
+    };
+    const _setSticker = async sticker => {
+        try{
+            await AsyncStorage.setItem('sticker',JSON.stringify(sticker));
+            setSticker(sticker);
+        }catch (e){
+            console.error(e);
+        }
+    };
+    const _setKeepSignIn = async keepSignIn => {
+        try{
+            await AsyncStorage.setItem('keepSignIn',JSON.stringify(keepSignIn));
+            setKeepSignIn(keepSignIn);
+        }catch (e){
+            console.error(e);
+        }
+    };
+    const _setLastAttendance = async LastAttendance => {
+        try{
+            await AsyncStorage.setItem('LastAttendance',JSON.stringify(LastAttendance));
+            setLastAttendance(LastAttendance);
+        }catch (e){
+            console.error(e);
+        }
+    };
+
     const userInfo={
         ID: id,
         Password: password,
@@ -48,19 +139,44 @@ const App = () =>{
         Mode: mode,
         Lists: lists,
         CheckSticker: sticker,
-        setId,
-        setAttendance,
-        setSkinColor,
-        setSort,
-        setSticker,
-        setLists,
+        KeepSignIn : keepSignIn,
+        LastAttendance: LastAttendance,
+        _setId,
+        _setPassword,
+        _setAttendance,
+        _setSkinColor,
+        _setSort,
+        _setSticker,
+        _setLists,
+        _setKeepSignIn,
+        _setLastAttendance,
         setMode,
-        setPassword,
     };
-    return(
+    const Stack=createNativeStackNavigator();
+    return isReady ? (
         <InfoContext.Provider value={userInfo}>
-        <AppMain/>
+            <NavigationContainer>
+            <Stack.Navigator initialRouteName="Title" screenOptions={{headerShown:false}}>
+                <Stack.Screen name="Title" component={Title} options={{title:'Caffeine Diary'}}/>
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="SignUp" component={SignupScreen} />
+                <Stack.Screen name="Main" component={AppMain} />
+                <Stack.Screen name="AddList" component={AddList} />
+                <Stack.Screen name="Del_Add_List" component={EditList} />
+                <Stack.Screen name="ListInfo" component={ListInfo} />
+                <Stack.Screen name="Completion" component={Ranking} />
+                <Stack.Screen name="MyPage" component={MyPage} />
+                <Stack.Screen name="LevelInfo" component={LevelInfo} />
+                <Stack.Screen name="Sticker_and_Skin" component={Stickers_and_Skins} />
+                <Stack.Screen name="Search" component={Search} />
+            </Stack.Navigator>
+            </NavigationContainer>
         </InfoContext.Provider>
+    ) : (
+        <AppLoading
+            startAsync = {_loadInfo}
+            onFinish = {()=>setIsReady(true)}
+            onError={console.error} />
     );
 }
 export default App;

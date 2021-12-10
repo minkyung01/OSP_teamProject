@@ -4,7 +4,7 @@ import {Pressable, Text, SafeAreaView} from 'react-native';
 import PropTypes from 'prop-types';
 import {basicColor} from '../colors';
 
-const TextButton = ({text}) =>{
+const TextButton = ({text, navigation, id}) =>{
     const [isTouch,SetIsTouch] =useState(false);
     const userContext = useContext(InfoContext);
     return(
@@ -15,7 +15,11 @@ const TextButton = ({text}) =>{
             }}
             onPressOut={()=>{
                 SetIsTouch(false);
-                text=="delete all"&& userContext.setLists(''); //delete all button
+                text=="delete all"&& userContext._setLists(''); //delete all button
+                text=="Log Out"&& navigation.push('Login');
+                text=="more"&& id=="a"&& navigation.navigate('LevelInfo');
+                text=="more"&& id=="s"&& navigation.navigate('Sticker_and_Skin');
+                text=="go to Main"&& navigation.push('Main');
             }}
         >
             <Text style={{

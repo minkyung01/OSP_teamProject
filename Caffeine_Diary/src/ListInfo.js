@@ -6,14 +6,15 @@ import InfoContext from './components/InfoContext';
 import BackArrow from './components/BackArrow';
 import PropTypes from 'prop-types';
 
-const ListInfo = ({date}) => {
+const ListInfo = ({navigation,route}) => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
+    const date = route.params.date
     return(
         <ScrollView>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
                 <SafeAreaView style={{paddingTop: 20,marginTop: 20,marginBottom: 20}}>
-                    <BackArrow />
+                    <BackArrow navigation={navigation}/>
                     <SafeAreaView style={{alignItems:'center'}}>
                         <Text style={styles.title}>Information about</Text>
                         <Text style={styles.title}>{userContext.Lists[date].todo}</Text>
@@ -62,10 +63,6 @@ const ListInfo = ({date}) => {
             </ScrollView>
     );
 };
-ListInfo.propTypes={
-    date: PropTypes.string.isRequired,
-};
-
 const styles = StyleSheet.create({
     container: {
         alignItems:'center',

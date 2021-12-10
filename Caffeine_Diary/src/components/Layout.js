@@ -19,7 +19,7 @@ export const Header = () => {
         </View>
     );
 };
-export const Contents = () => {
+export const Contents = ({navigation}) => {
     const userContext = useContext(InfoContext);
     const [item,setItem] = useState('today');
     return (
@@ -44,11 +44,11 @@ export const Contents = () => {
 
             <View style={styles.edit}>
                 <SelectBtn/>
-                <IconButton type={iconImages.edit} page={"EditList"}/>
+                <IconButton type={iconImages.edit} page={"EditList"} onPressOut={()=> navigation.navigate('Del_Add_List')}/>
             </View>
         </View>
         <Category title="Today's Schedule" />
-        <ScrollView style={{height:'54%'}}>
+        <ScrollView style={{height:'52.5%'}}>
                 {(item==='today')&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).map(listItem => (
                     <List key={listItem.date}
@@ -56,8 +56,8 @@ export const Contents = () => {
                           action={(date)=>{
                             listItem.completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
-                            userContext.setLists(currentLists);
-                       }} page={"showList"}/>
+                            userContext._setLists(currentLists);
+                       }} page={"showList"} navigation={navigation}/>
                 )))}
                 {(item==='assignment')&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='assignment').map(listItem => (
@@ -66,8 +66,8 @@ export const Contents = () => {
                           action={(date)=>{
                             listItem.completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
-                            userContext.setLists(currentLists);
-                       }} page={"showList"}/>
+                            userContext._setLists(currentLists);
+                       }} page={"showList"} navigation={navigation}/>
                 )))}
                 {(item==='hobby')&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='hobby').map(listItem => (
@@ -76,8 +76,8 @@ export const Contents = () => {
                           action={(date)=>{
                             listItem.completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
-                            userContext.setLists(currentLists);
-                       }} page={"showList"}/>
+                            userContext._setLists(currentLists);
+                       }} page={"showList"} navigation={navigation}/>
                 )))}
                 {(item==='lecture')&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='lecture').map(listItem => (
@@ -86,8 +86,8 @@ export const Contents = () => {
                           action={(date)=>{
                             listItem.completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
-                            userContext.setLists(currentLists);
-                       }} page={"showList"}/>
+                            userContext._setLists(currentLists);
+                       }} page={"showList"} navigation={navigation}/>
                 )))}
                 {(item==='etc.')&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='etc.').map(listItem => (
@@ -96,8 +96,8 @@ export const Contents = () => {
                           action={(date)=>{
                             listItem.completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
-                            userContext.setLists(currentLists);
-                       }} page={"showList"}/>
+                            userContext._setLists(currentLists);
+                       }} page={"showList"} navigation={navigation}/>
                 )))}
                 {(item==='completed')&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.completed===true).map(listItem => (
@@ -106,8 +106,8 @@ export const Contents = () => {
                           action={(date)=>{
                             listItem.completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
-                            userContext.setLists(currentLists);
-                       }} page={"showList"}/>
+                            userContext._setLists(currentLists);
+                       }} page={"showList"} navigation={navigation}/>
                 )))}
                 {(item==='uncompleted')&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.completed===false).map(listItem => (
@@ -116,17 +116,17 @@ export const Contents = () => {
                           action={(date)=>{
                             listItem.completed = !listItem.completed;
                             const currentLists = Object.assign({}, userContext.Lists);
-                            userContext.setLists(currentLists);
-                       }} page={"showList"}/>
+                            userContext._setLists(currentLists);
+                       }} page={"showList"} navigation={navigation}/>
                 )))}
         </ScrollView>
         </View>
     );
 };
 
-export const Footer = () => {
+export const Footer = ({navigation}) => {
     return (
-        <NavBar />
+        <NavBar navigation={navigation}/>
     );
 };
 

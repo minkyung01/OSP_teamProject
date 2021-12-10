@@ -3,10 +3,10 @@ import {StyleSheet, Pressable,Image,SafeAreaView} from 'react-native';
 import {iconImages} from '../images';
 import MyPage from '../MyPage';
 
-const BackArrow = () => {
+const BackArrow = ({navigation}) => {
     return(
     <SafeAreaView style={{marginRight:20}}>
-        <Pressable style={{marginLeft:'auto'}} onPress={()=>alert('back to My Page')}>
+        <Pressable style={{marginLeft:'auto'}} onPress={()=>navigation.goBack()}>
 
             <Image style={styles.backIMG} source={iconImages.backArrow} />
         </Pressable>

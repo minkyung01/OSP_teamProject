@@ -5,11 +5,13 @@ import {basicColor, themeColor} from './colors';
 import { iconImages } from './images';
 import { textStyles } from './styles';
 import Title from './components/Title';
+import NavBar from './components/NavBar';
 
-const Search = () => {
+const Search = ({navigation}) => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
     return(
+    <SafeAreaView>
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
             <ScrollView width = {width-20} height = '80%'>
@@ -31,7 +33,9 @@ const Search = () => {
                 </SafeAreaView>
             </SafeAreaView>
             </ScrollView>
-            
+
+            </SafeAreaView>
+        <NavBar navigation={navigation}/>
         </SafeAreaView>
     );
 };
@@ -40,6 +44,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems:'center',
         padding: 20,
+        height:'89.2%',
     },
     content: {
         margin: 10,

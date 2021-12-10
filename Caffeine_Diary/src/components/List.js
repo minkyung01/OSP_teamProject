@@ -1,12 +1,12 @@
 import React, {useContext} from "react";
 import InfoContext from './InfoContext';
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Pressable} from "react-native";
 import { basicColor, themeColor } from '../colors';
 import { iconImages, stickerImages } from '../../src/images';
 import IconButton from './IconButton';
 import propTypes from 'prop-types';
 
-const List = ({ item, action,page }) => {
+const List = ({ item, action,page,navigation }) => {
     const userContext = useContext(InfoContext);
     return (
         <View style={[styles.list,{backgroundColor: userContext.SkinColor.light}]}>
@@ -20,11 +20,16 @@ const List = ({ item, action,page }) => {
                 }
                 id={item.date} onPressOut={action} />
             </View>
+            <View style={{flexDirection:'row',justifyContent:'space-between', width:'80%'}}>
+            <Pressable style={{alignSelf: 'center',marginBottom:2}}
+            onPress={()=>navigation.navigate('ListInfo',{date:item.date})}>
             <Text style={[styles.textList,
             {textDecorationLine: (item.completed? 'line-through' : 'none')}]}>
                 {item.todo}
             </Text>
+            </Pressable>
             {(page=="showList")&&<UpDown />}
+            </View>
         </View>
     );
 };
@@ -47,10 +52,8 @@ const styles = StyleSheet.create({
         paddingRight:10,
         borderRadius: 5,
         flexDirection: 'row',
-        justifyContent:'space-between',
     },
     textList: {
-        alignSelf: 'center',
         fontSize: 20,
         fontWeight: '700',
         color: basicColor.text,

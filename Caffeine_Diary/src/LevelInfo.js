@@ -4,10 +4,10 @@ import {iconImages, levelImages} from './images';
 import BackArrow from './components/BackArrow';
 import Title from './components/Title';
 
-const LevelInfo = () => {
+const LevelInfo = ({navigation}) => {
     return(
         <ScrollView style={styles.container}>
-        <BackArrow />
+        <BackArrow navigation={navigation}/>
         <SafeAreaView style={{paddingRight:10, paddingLeft:10,alignItems:'center'}} >
             <Title />
             <Text style={{fontSize: 22,fontWeight:'700',marginRight:'auto',marginLeft:5,marginBottom:10}}>Your level determined by attendance!</Text>

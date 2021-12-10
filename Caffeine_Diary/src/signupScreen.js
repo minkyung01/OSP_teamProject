@@ -4,6 +4,7 @@ import InfoContext from './components/InfoContext';
 import {Pressable} from 'react-native';
 import Title from './components/Title';
 import {basicColor,themeColor} from './colors';
+import BackArrow from './components/BackArrow';
 import {
   StyleSheet,
   Text,
@@ -14,7 +15,7 @@ import {
   TouchableOpacity,
 } from "react-native";
  
-const SignupScreen =() =>{
+const SignupScreen =({navigation}) =>{
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [submit,setSubmit] = useState(false);
@@ -24,9 +25,9 @@ const SignupScreen =() =>{
         alert('Please fill ID and Password');
       }
       else{
-        alert('back to sign in page');
-        userContext.setId(name);
-        userContext.setPassword(password);
+        navigation.navigate('Login');
+        userContext._setId(name);
+        userContext._setPassword(password);
         setName('');
         setPassword('');
       }
@@ -34,9 +35,10 @@ const SignupScreen =() =>{
    }
     return (
       <View style={styles.container}>
+        <BackArrow navigation={navigation} />
         <Title />
         <StatusBar style="auto" />
-        <View style={styles.inputView}>
+        <View style={[styles.inputView,{backgroundColor:userContext.SkinColor.light}]}>
   
           <TextInput
             style={styles.TextInput}
@@ -48,7 +50,7 @@ const SignupScreen =() =>{
         </View>
    
  
-      <View style={styles.inputView}>
+      <View style={[styles.inputView,{backgroundColor:userContext.SkinColor.light}]}>
         <TextInput
           style={styles.TextInput}
           placeholder="Password."
@@ -59,7 +61,7 @@ const SignupScreen =() =>{
         />
       </View>
  
-      <Pressable style={styles.signup_Btn} onPress={handleSubmitButton}>
+      <Pressable style={[styles.signup_Btn,{backgroundColor:userContext.SkinColor.dark}]} onPress={handleSubmitButton}>
         <Text>Sign Up</Text>
       </Pressable>
 
@@ -81,7 +83,6 @@ const styles = StyleSheet.create({
   },
  
   inputView: {
-    backgroundColor: "#FFE4C3", //themeColor.Orange.light
     borderRadius: 30,
     width: "70%",
     height: 45,
@@ -105,7 +106,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: themeColor.Orange.dark,
   },
   
 });

@@ -10,11 +10,11 @@ import List from './components/List';
 import Category from './components/Category';
 import IconButton from './components/IconButton';
 
-const EditList = () => {
+const EditList = ({navigation}) => {
     const userContext = useContext(InfoContext);
     return(
         <ScrollView style={styles.container}>
-            <BackArrow />
+            <BackArrow navigation={navigation}/>
             <SafeAreaView style={{alignItems:'center'}}>
                 <Title />
             </SafeAreaView>
@@ -25,12 +25,12 @@ const EditList = () => {
             {Object.values(userContext.Lists).reverse().map(listItem => (
                 <List key={listItem.date} item={listItem}
                 action={()=>{ // delete to-do-list
-                    userContext.setLists(Object.values(userContext.Lists).filter(LIST=>LIST.date !== listItem.date));
-                }} page={"editList"}/>
+                    userContext._setLists(Object.values(userContext.Lists).filter(LIST=>LIST.date !== listItem.date));
+                }} page={"editList"} navigation={navigation}/>
             ))}
             <SafeAreaView style={[styles.list,{backgroundColor: userContext.SkinColor.light,marginBottom:30}]}>
                 <SafeAreaView style={{margin:15}}>
-                    <IconButton type={iconImages.add }/>
+                    <IconButton type={iconImages.add } onPressOut={()=>navigation.navigate('AddList')}/>
                 </SafeAreaView>
             </SafeAreaView>
         </ScrollView>

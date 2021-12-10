@@ -5,8 +5,9 @@ import { textStyles } from './styles';
 import {levelImages, iconImages} from './images';
 import InfoContext from './components/InfoContext';
 import {Picker} from '@react-native-picker/picker';
+import NavBar from "./components/NavBar";
 
-const Ranking = () => {
+const Ranking = ({navigation}) => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
     const [total,setTotal] = useState(0); //total completion rate
@@ -36,9 +37,9 @@ const Ranking = () => {
     const WeekAgo = new Date(year,month,day-DAY).getFullYear().toString()+(new Date(year,month,day-DAY).getMonth()+10).toString()+(new Date(year,month,day-DAY).getDate()+10).toString();// 일주일전 날짜 YYYYMMDD
 
     return(
+    <SafeAreaView style={{padding:0}}>
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
-            <ScrollView width = {width-20} height = '100%'>
             
             <SafeAreaView style={{flexDirection:'row',alignItems:'center'}}>
                 <Image
@@ -130,7 +131,7 @@ const Ranking = () => {
                         <Picker.Item style={{fontSize:20}} label="This Month" value={'this month'} />
                     </Picker>
             </SafeAreaView>
-
+            <ScrollView style={{width:'100%', height: '56.4%'}}>
             <SafeAreaView style={{alignItems:'center',backgroundColor:userContext.SkinColor.dark,paddingTop:40,paddingBottom:40}}>
                 <SafeAreaView style={styles.content}>
                     {(start)&&(
@@ -138,7 +139,9 @@ const Ranking = () => {
                     {(!start)&&(select)&&(<Text style={styles.best}>Please press "Show Result" button.</Text>)}
                     {(!start)&&(!select)&&(<Text style={styles.best}>Please select an option.</Text>)}
                 </SafeAreaView>
+
             </SafeAreaView>
+
             {(start)&&(
             <SafeAreaView style={{flexDirection:'row', backgroundColor:userContext.SkinColor.dark,marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
@@ -176,13 +179,16 @@ const Ranking = () => {
                 </SafeAreaView>
             </SafeAreaView>)}
             </ScrollView>
+
         </SafeAreaView>
+    <NavBar navigation={navigation} />
+    </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        alignItems:'center',
+        justifyContent:'space-between',
         padding: 10,
     },
     content: {
