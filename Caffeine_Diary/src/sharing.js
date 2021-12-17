@@ -1,5 +1,4 @@
 
-
 //Ranking.js에 이용
 import React from 'react';
 import { Share, View, Button } from 'react-native';
@@ -11,6 +10,9 @@ import {
 	TwitterShareButton,
 } from "react-share";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+<Text onPress={() => onShare()}>이거 누르면 공유하기 가능</Text>
+
+
 
 const FlexContainer = styled.div`
 	display: flex;
@@ -43,8 +45,8 @@ const URLShareButton = styled.Share`
 	}
 `;
 
-function sharing() {
-    
+const onShare = async () => { 
+//function sharing() {
       const currentUrl = window.location.href;
       return (
           <FlexContainer>
@@ -63,7 +65,6 @@ function sharing() {
               </GridContainer>
           </FlexContainer>
       );
-  }
+}
 
 export default sharing;
-
