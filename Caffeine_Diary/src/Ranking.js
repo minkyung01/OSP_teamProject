@@ -64,8 +64,6 @@ const Ranking = ({navigation}) => {
     return(
     <SafeAreaView style={{padding:0, height:'100%'}}>
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
-            
             <SafeAreaView style={{flexDirection:'row',alignItems:'center'}}>
                 <Image
                 style={(()=>{

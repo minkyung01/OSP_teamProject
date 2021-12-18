@@ -15,7 +15,7 @@ const TextButton = ({text, navigation, id}) =>{
             }}
             onPressOut={()=>{
                 SetIsTouch(false);
-                text=="delete all"&& userContext._setLists(''); //delete all button
+                text=="delete all"&& userContext._setLists(null); //delete all button
                 text=="Log Out"&& navigation.navigate('Login');
                 text=="more"&& id=="a"&& navigation.navigate('LevelInfo');
                 text=="more"&& id=="s"&& navigation.navigate('Sticker_and_Skin');

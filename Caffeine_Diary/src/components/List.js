@@ -30,20 +30,10 @@ const List = ({ item, action,page,navigation }) => {
                 {item.todo}
             </Text>
             </Pressable>
-            {(page=="showList")&&<UpDown />}
             </View>
         </View>
     );
 };
-const UpDown =()=> {
-    return(
-        <View>
-            <IconButton type={iconImages.up} />
-            <IconButton type={iconImages.down} />
-        </View>
-    );
-};
-//나중에 item.id를 item.text로 바꿔야 함
 
 const styles = StyleSheet.create({
     list: {

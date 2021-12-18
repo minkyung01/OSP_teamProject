@@ -31,23 +31,18 @@ const ListInfo = ({navigation,route}) => {
                 </SafeAreaView>
 
                 <SafeAreaView style={{flexDirection:'row', backgroundColor: basicColor.itemBackground}}>
+                    <Text style={styles.greyBox}>Completed?</Text>
+                    <SafeAreaView style={styles.comment}>
+                        <Text style={styles.input}>{item.completed?'Yes':'No'}</Text>
+                    </SafeAreaView>
+                </SafeAreaView>
+                <SafeAreaView style={{flexDirection:'row', backgroundColor: basicColor.itemBackground,paddingBottom:60}}>
                     <Text style={styles.greyBox}>Comment</Text>
                     <SafeAreaView style={styles.comment}>
-                        <Text style={{backgroundColor: '#FFFFFF', width: '90%',  fontSize:23, fontWeight:'400', marginTop: 30, padding: 5}}>
+                        <Text style={{backgroundColor: '#FFFFFF', width: '90%',  fontSize:23, fontWeight:'400', marginTop: 30, padding: 5,marginLeft:10}}>
                         {item.comment}
                         </Text>
                     </SafeAreaView>
-                </SafeAreaView>
-
-                <SafeAreaView style={{flexDirection:'row', backgroundColor: basicColor.itemBackground}}>
-                    <Text style={styles.greyBox}>Location</Text>
-                    <Text style={styles.input}>Ewha Womans University</Text>
-                </SafeAreaView>
-
-                <SafeAreaView style={{flexDirection:'row'}}>
-                    <Pressable style={{ flex: 1, backgroundColor: basicColor.itemBackground,alignItems: 'center'}}>
-                        <Text style={{fontSize:23,fontWeight:'700',padding: 90}}>Image</Text>
-                    </Pressable>
                 </SafeAreaView>
 
 
@@ -85,6 +80,7 @@ const styles = StyleSheet.create({
         fontWeight:'400',
         paddingTop: 30,
         paddingBottom: 30,
+        paddingLeft:15,
     },
     comment: {
         flex: 2,
