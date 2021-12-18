@@ -59,7 +59,7 @@ const App = () =>{
     };
     return(
         <InfoContext.Provider value={userInfo}>
-        <Search />
+        <AppMain/>
         </InfoContext.Provider>
     );
 }
