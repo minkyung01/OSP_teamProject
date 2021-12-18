@@ -7,6 +7,7 @@ import React,{useState} from 'react';
 import InfoContext from './components/InfoContext';
 import {themeColor} from './colors';
 import EditList from './EditList';
+import EditContent from './EditContent';
 import Ranking from './Ranking';
 import AddList from './AddList';
 import ListInfo from './ListInfo';
@@ -164,6 +165,7 @@ const App = () =>{
                 <Stack.Screen name="AddList" component={AddList} />
                 <Stack.Screen name="Del_Add_List" component={EditList} />
                 <Stack.Screen name="ListInfo" component={ListInfo} />
+                <Stack.Screen name="EditContent" component={EditContent} />
                 <Stack.Screen name="Completion" component={Ranking} />
                 <Stack.Screen name="MyPage" component={MyPage} />
                 <Stack.Screen name="LevelInfo" component={LevelInfo} />
