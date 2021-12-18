@@ -18,7 +18,7 @@ const AppMain = ({navigation})=> {
     return (
     <SafeAreaView style={styles.basic}>
         <SafeAreaView style={{height:'89%'}}>
-        <Title />
+        <View style={{alignItems:'center'}}><Title /></View>
         <View style={[{flexDirection: 'row',alignItems:'center',justifyContent:'space-between',marginBottom:10}]}>
         <SafeAreaView style={[styles.button,{backgroundColor:userContext.SkinColor.light}]}>
             <Picker
@@ -45,7 +45,7 @@ const AppMain = ({navigation})=> {
         </View>
         <Category title={item}/>
         <ScrollView>
-                {(item==="All Schedule")&&(
+                {(item==="All Schedule")&&(userContext.Lists)&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
@@ -55,7 +55,7 @@ const AppMain = ({navigation})=> {
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
                 ))}
-                {(item==="Today's Schedule")&&(
+                {(item==="Today's Schedule")&&(userContext.Lists)&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>parseInt(LIST.deadline) >= DATE).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
@@ -65,7 +65,7 @@ const AppMain = ({navigation})=> {
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
                 ))}
-                {(item==="Today's Assignment")&&(
+                {(item==="Today's Assignment")&&(userContext.Lists)&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>(LIST.category==='assignment')&&(parseInt(LIST.deadline) >= DATE)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
@@ -75,7 +75,7 @@ const AppMain = ({navigation})=> {
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
                 ))}
-                {(item==="Today's Hobby")&&(
+                {(item==="Today's Hobby")&&(userContext.Lists)&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>(LIST.category==='hobby')&&(parseInt(LIST.deadline) >= DATE)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
@@ -85,7 +85,7 @@ const AppMain = ({navigation})=> {
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
                 ))}
-                {(item==="Today's Lecture")&&(
+                {(item==="Today's Lecture")&&(userContext.Lists)&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>(LIST.category==='lecture')&&(parseInt(LIST.deadline) >= DATE)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
@@ -95,7 +95,7 @@ const AppMain = ({navigation})=> {
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
                 ))}
-                {(item==="Today's etc.")&&(
+                {(item==="Today's etc.")&&(userContext.Lists)&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>(LIST.category==='etc.')&&(parseInt(LIST.deadline) >= DATE)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
@@ -105,7 +105,7 @@ const AppMain = ({navigation})=> {
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
                 ))}
-                {(item==='Completed')&&(
+                {(item==='Completed')&&(userContext.Lists)&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>LIST.completed===true).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
@@ -115,7 +115,7 @@ const AppMain = ({navigation})=> {
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
                 ))}
-                {(item==='Uncompleted')&&(
+                {(item==='Uncompleted')&&(userContext.Lists)&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>LIST.completed===false).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}

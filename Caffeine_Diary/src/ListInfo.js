@@ -52,7 +52,7 @@ const ListInfo = ({navigation,route}) => {
 
 
                 <SafeAreaView style={{flexDirection:'row'}}>
-                    <Pressable onPress={()=>{navigation.push('EditContent',{item:item})}}>
+                    <Pressable onPress={()=>{navigation.navigate('EditContent',{item:item})}}>
                         <Text style={{ backgroundColor: basicColor.itemBackground, fontSize:23,fontWeight:'700',paddingTop: 13,paddingBottom: 13,paddingLeft: '40%', paddingRight: '40%', margin:15}}>
                         edit</Text>
                     </Pressable>

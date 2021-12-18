@@ -12,13 +12,13 @@ import Ranking from './Ranking';
 import AddList from './AddList';
 import ListInfo from './ListInfo';
 import LoginScreen from './loginScreen';
-import SuccessScreen from './successScreen';
 import SignupScreen from './signupScreen';
 import Search from './Search';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 const App = () =>{
     const [isReady, setIsReady] = useState(false);
     const [id, setId] = useState();
@@ -28,7 +28,6 @@ const App = () =>{
     const [skinColor, setSkinColor] = useState(themeColor.Orange);
     const [sort, setSort] = useState(); // sort method
     const [sticker,setSticker] = useState(); // check sticker type(0~4)
-    const [mode,setMode] = useState('option'); //completion rate mode
     const [lists, setLists] = useState(); /*date: 현재 date, todo: 할일내용, category:카테고리, comment: 메모, completed: 끝남여부*/
     const [keepSignIn, setKeepSignIn] = useState(false);
     const _loadInfo = async () => {
@@ -42,15 +41,15 @@ const App = () =>{
         const loadedKeepSignIn = await AsyncStorage.getItem('keepSignIn');
         const loadedLastAttendance = await AsyncStorage.getItem('LastAttendance');
 
-        setId(JSON.parse(loadedId||''));
-        setPassword(JSON.parse(loadedPassword||''));
-        setAttendance(JSON.parse(loadedAttendance||0));
-        setSort(JSON.parse(loadedSort||'closest'));
-        setSkinColor(JSON.parse(loadedSkinColor||themeColor.Orange));
-        setLists(JSON.parse(loadedLists||'[]'));
-        setSticker(JSON.parse(loadedCheckSticker||0));
-        setKeepSignIn(JSON.parse(loadedKeepSignIn||false));
-        setLastAttendance(JSON.parse(loadedLastAttendance||''));
+        setId(JSON.parse(loadedId)||'');
+        setPassword(JSON.parse(loadedPassword)||'');
+        setAttendance(JSON.parse(loadedAttendance)||0);
+        setSort(JSON.parse(loadedSort)||"closest");
+        setSkinColor(JSON.parse(loadedSkinColor)||themeColor.Orange);
+        setLists(JSON.parse(loadedLists)||'{}');
+        setSticker(JSON.parse(loadedCheckSticker)||0);
+        setKeepSignIn(JSON.parse(loadedKeepSignIn)||false);
+        setLastAttendance(JSON.parse(loadedLastAttendance)||'');
     }
     const _setId = async id => {
         try{
@@ -137,7 +136,6 @@ const App = () =>{
             else return 2;})(),
         LevelName: ["Water","Coffee-Bean","Americano"],
         Category: ["assignment","lecture","hobby","etc.",],
-        Mode: mode,
         Lists: lists,
         CheckSticker: sticker,
         KeepSignIn : keepSignIn,
@@ -151,7 +149,6 @@ const App = () =>{
         _setLists,
         _setKeepSignIn,
         _setLastAttendance,
-        setMode,
     };
     const Stack=createNativeStackNavigator();
     return isReady ? (

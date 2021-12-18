@@ -20,7 +20,7 @@ const Search = ({navigation}) => {
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
             <ScrollView width = {width-20} height = '80%'>
-            <Title />
+            <View style={{alignItems:'center'}}><Title /></View>
 
             <SafeAreaView style={{flexDirection: 'row',backgroundColor:userContext.SkinColor.dark}}>
             <Pressable onPressIn={()=>{

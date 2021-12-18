@@ -23,6 +23,7 @@ const Ranking = ({navigation}) => {
     const [newLists, setNewLists] = useState([]);
     const [start,setStart] = useState(false); // Whether click show Result button or not
     const [select,setSelect] = useState(false); // Whether select an option or not
+    const [mode,setMode] = useState('option'); //completion rate mode
     const Month = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     const year = new Date().getFullYear();
     const month = new Date().getMonth();
@@ -37,7 +38,7 @@ const Ranking = ({navigation}) => {
     const WeekAgo = new Date(year,month,day-DAY).getFullYear().toString()+(new Date(year,month,day-DAY).getMonth()+10).toString()+(new Date(year,month,day-DAY).getDate()+10).toString();// 일주일전 날짜 YYYYMMDD
     const onShare = async () => {
      try {
-        const Message = userContext.ID+" achieved "+Math.round(total/(count==0?1:count)*100)+"% "+userContext.Mode+".";
+        const Message = userContext.ID+" achieved "+Math.round(total/(count==0?1:count)*100)+"% "+mode+".";
         const explanation = "* Assignment: "+Math.round(one/(countOne==0?1:countOne)*100)+"% done!\n* Lecture: "+Math.round(two/(countTwo==0?1:countTwo)*100)+"% done!\n* Hobby: "+Math.round(three/(countThree==0?1:countThree)*100)+"% done!\n* Etc.: "+Math.round(four/(countFour==0?1:countFour)*100)+"% done!\n";
         const last= "I did a lot, right?😉 Show yours, too!"
         const result = await Share.share(
@@ -90,7 +91,7 @@ const Ranking = ({navigation}) => {
                     <Pressable
                         style={[styles.dropdown,{backgroundColor:userContext.SkinColor.dark,width:120}]}
                         onPress={()=>{
-                        if(userContext.Mode ==='option') alert('Please select an option');
+                        if(mode ==='option') alert('Please select an option');
                         else{
                         setTotal(0);
                         setCount(0);
@@ -126,9 +127,9 @@ const Ranking = ({navigation}) => {
                     </Pressable>
                     <Picker
                       style={[styles.dropdown,{backgroundColor:userContext.SkinColor.light}]}
-                      selectedValue={userContext.Mode}
+                      selectedValue={mode}
                       onValueChange={(val,idx)=> {
-                        userContext.setMode(val);
+                        setMode(val);
                         setStart(false);
                         if(val !=='option') setSelect(true);
                         else setSelect(false);
@@ -159,7 +160,7 @@ const Ranking = ({navigation}) => {
             <SafeAreaView style={{alignItems:'center',backgroundColor:userContext.SkinColor.dark,paddingTop:40,paddingBottom:40}}>
                 <SafeAreaView style={styles.content}>
                     {(start)&&(
-                        <Text style={styles.best}>{userContext.ID} achieved {Math.round(total/(count==0?1:count)*100)}% {userContext.Mode}</Text>)}
+                        <Text style={styles.best}>{userContext.ID} achieved {Math.round(total/(count==0?1:count)*100)}% {mode}</Text>)}
                     {(!start)&&(select)&&(<Text style={styles.best}>Please press "Show Result" button.</Text>)}
                     {(!start)&&(!select)&&(<Text style={styles.best}>Please select an option.</Text>)}
                 </SafeAreaView>
@@ -169,9 +170,9 @@ const Ranking = ({navigation}) => {
             {(start)&&(
             <SafeAreaView style={{flexDirection:'row', backgroundColor:userContext.SkinColor.dark,marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
-                     {(userContext.Mode==='today')&&(<Text style={styles.completionRate}>{year} . {month+1} . {day}</Text>)}
-                     {(userContext.Mode==='this week')&&(<Text style={styles.completionRate}>{weekYear}.{weekMonth+1}.{weekDay} (Mon) ~ {year}.{month+1}.{day}</Text>)}
-                     {(userContext.Mode==='this month')&&(<Text style={styles.completionRate}>{Month[month]} .</Text>)}
+                     {(mode==='today')&&(<Text style={styles.completionRate}>{year} . {month+1} . {day}</Text>)}
+                     {(mode==='this week')&&(<Text style={styles.completionRate}>{weekYear}.{weekMonth+1}.{weekDay} (Mon) ~ {year}.{month+1}.{day}</Text>)}
+                     {(mode==='this month')&&(<Text style={styles.completionRate}>{Month[month]} .</Text>)}
                 </SafeAreaView>
             </SafeAreaView>
             )}

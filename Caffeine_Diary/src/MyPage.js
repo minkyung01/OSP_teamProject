@@ -78,7 +78,7 @@ const MyPage = ({navigation}) => {
             </SafeAreaView>
            </SafeAreaView>
 
-           <SafeAreaView style={{marginTop: 30,marginBottom:20}}>
+           <SafeAreaView style={{marginTop: 30,marginBottom:30}}>
             <Text style={styles.title}>How to list-up?</Text>
             <SortButton text="show the closest due date first" method="closest"/>
             <SortButton text="show the latest added date first" method="latest" />
@@ -94,8 +94,7 @@ const styles = StyleSheet.create({
     container:{
       flex: 1,
       padding: 10,
-      paddingTop:20,
-      marginTop:20,
+      paddingTop:30,
       backgroundColor: basicColor.background,
       flexDirection: 'column',
     },

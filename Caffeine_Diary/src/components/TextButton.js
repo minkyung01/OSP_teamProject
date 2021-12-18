@@ -16,10 +16,10 @@ const TextButton = ({text, navigation, id}) =>{
             onPressOut={()=>{
                 SetIsTouch(false);
                 text=="delete all"&& userContext._setLists(''); //delete all button
-                text=="Log Out"&& navigation.push('Login');
+                text=="Log Out"&& navigation.navigate('Login');
                 text=="more"&& id=="a"&& navigation.navigate('LevelInfo');
                 text=="more"&& id=="s"&& navigation.navigate('Sticker_and_Skin');
-                text=="go to Main"&& navigation.push('Main');
+                text=="go to Main"&& navigation.navigate('Main');
             }}
         >
             <Text style={{
