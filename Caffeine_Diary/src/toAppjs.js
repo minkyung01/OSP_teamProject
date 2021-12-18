@@ -1,4 +1,4 @@
-
+//App.js
 //Ranking.js에 이용
 import React from 'react';
 import { Share, View, Button } from 'react-native';
