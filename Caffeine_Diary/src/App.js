@@ -46,7 +46,7 @@ const App = () =>{
         setAttendance(JSON.parse(loadedAttendance)||0);
         setSort(JSON.parse(loadedSort)||"closest");
         setSkinColor(JSON.parse(loadedSkinColor)||themeColor.Orange);
-        setLists(JSON.parse(loadedLists)||'{}');
+        setLists(JSON.parse(loadedLists)||null);
         setSticker(JSON.parse(loadedCheckSticker)||0);
         setKeepSignIn(JSON.parse(loadedKeepSignIn)||false);
         setLastAttendance(JSON.parse(loadedLastAttendance)||'');

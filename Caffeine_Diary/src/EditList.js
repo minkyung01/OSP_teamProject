@@ -22,12 +22,12 @@ const EditList = ({navigation}) => {
                 <TextButton text="delete all" />
             </SafeAreaView>
             <Category title="Edit List" />
-            {Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1)).map(listItem => (
+            {(userContext.Lists)&&(Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1)).map(listItem => (
                 <List key={listItem.date} item={listItem}
                 action={()=>{ // delete to-do-list
                     userContext._setLists(Object.values(userContext.Lists).filter(LIST=>LIST.date !== listItem.date));
                 }} page={"editList"} navigation={navigation}/>
-            ))}
+            )))}
             <SafeAreaView style={[styles.list,{backgroundColor: userContext.SkinColor.light,marginBottom:30}]}>
                 <SafeAreaView style={{margin:15}}>
                     <IconButton type={iconImages.add } onPressOut={()=>navigation.navigate('AddList')}/>

@@ -229,7 +229,7 @@ const AddList = ({navigation}) => {
 
                 <SafeAreaView style={{flexDirection:'row'}}>
                     <Pressable onPress={_addList}>
-                        <Text style={{ backgroundColor: basicColor.itemBackground, fontSize:23,fontWeight:'700',paddingTop: 13,paddingBottom: 13, paddingLeft: '40%', paddingRight: '40%', margin: 20}}>
+                        <Text style={{ backgroundColor: basicColor.itemBackground, fontSize:22,fontWeight:'700',paddingTop: 13,paddingBottom: 13, paddingLeft: '40%', paddingRight: '40%', margin: 20}}>
                         add</Text>
                     </Pressable>
                 </SafeAreaView>

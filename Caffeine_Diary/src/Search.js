@@ -51,7 +51,7 @@ const Search = ({navigation}) => {
 
             <Text style={styles.text}>search result: {count}</Text>
 
-                {(search=='')||(count==0)||
+                {(search=='')||(count==0)||(userContext.Lists)&&
                 (Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1)).map(listItem => (
                 (listItem.todo.includes(search))&&(
                     <List key={listItem.date}
