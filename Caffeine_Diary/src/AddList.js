@@ -153,7 +153,7 @@ const AddList = ({navigation}) => {
             [Date]: {date:Date, todo:todo, deadline:Deadline,category:category,comment:comment,completed: false},
         };
         (()=>{ //Check whether the deadline is ahead of the current date.
-            //if(parseInt(Deadline)>=parseInt(now)){
+            if(parseInt(Deadline)>=parseInt(now)){
                 userContext._setLists({...userContext.Lists, ...newListObject});
                 alert('The schedule has been added successfully.');
                 setTodo('');
@@ -166,11 +166,10 @@ const AddList = ({navigation}) => {
                     userContext._setAttendance(userContext.Attendance+1); // 출석일수 +=1
                     userContext._setLastAttendance(YEAR_str+MONTH_str+DAY_str) // 오늘 날짜 -> 마지막 출석일로 저장
                 }
-            //}
-           // else{
-            //    alert("Invalid deadline. Please enter the proper schedule information.");
-
-           // }
+            }
+            else{
+                alert("Invalid deadline. Please enter the proper schedule information.");
+            }
         })()
 
     };

@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useState} from 'react';
 import {StatusBar, SafeAreaView,Pressable, View,Text, StyleSheet, Image, TextInput,ScrollView, Dimensions} from 'react-native';
 import InfoContext from './components/InfoContext';
 import {basicColor, themeColor} from './colors';
@@ -6,10 +6,15 @@ import { iconImages } from './images';
 import { textStyles } from './styles';
 import Title from './components/Title';
 import NavBar from './components/NavBar';
+import List from './components/List';
 
 const Search = ({navigation}) => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
+    const [text, setText] = useState('');
+    const [search, setSearch] = useState('');
+    const [count, setCount] = useState(0);
+    const [click, setClick] = useState(0);
     return(
     <SafeAreaView>
         <SafeAreaView style={styles.container}>
@@ -18,28 +23,52 @@ const Search = ({navigation}) => {
             <Title />
 
             <SafeAreaView style={{flexDirection: 'row',backgroundColor:userContext.SkinColor.dark}}>
-            <Pressable>
+            <Pressable onPressIn={()=>{
+                setSearch(text);
+                setClick(click=>click+1);
+            }}
+            onPressOut={()=>{
+                (()=>{
+                    if((search !='')&&(click==1)){
+                        Object.values(userContext.Lists).map(listItem => (
+                        (()=>{
+                            if(listItem.todo.includes(search)){
+                                setCount(count=>count+1);
+                            }
+                        })()
+                        ))
+                    }
+                })()
+
+                }}>
                 <Image style={styles.search} source={iconImages.search} />
             </Pressable>
             <TextInput style={styles.searchBar}
-                placeholder="Search a task">
+                placeholder="Search a task"
+                onChangeText={text=>{setText(text);setCount(0);setClick(0);}}>
             </TextInput>
             </SafeAreaView>
 
-            <Text style={styles.text}>search result: 1</Text>
-            <SafeAreaView style={{alignItems:'center',flexDirection:'row',backgroundColor:userContext.SkinColor.light,width:'100%',marginTop:10,paddingTop:10,paddingBottom:10}}>
-                <SafeAreaView style={styles.content}>
-                     <Text style={styles.result}>Buying milk</Text>
-                </SafeAreaView>
-            </SafeAreaView>
-            </ScrollView>
+            <Text style={styles.text}>search result: {count}</Text>
 
+                {(search=='')||(count==0)||
+                (Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1)).map(listItem => (
+                (listItem.todo.includes(search))&&(
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext._setLists(currentLists);
+                       }} page={"search"} navigation={navigation}/>
+                )
+                )))}
+            </ScrollView>
             </SafeAreaView>
         <NavBar navigation={navigation}/>
         </SafeAreaView>
     );
 };
-
 const styles = StyleSheet.create({
     container: {
         alignItems:'center',

@@ -9,10 +9,12 @@ import propTypes from 'prop-types';
 const List = ({ item, action,page,navigation }) => {
     const userContext = useContext(InfoContext);
     return (
-        <View style={[styles.list,{backgroundColor: userContext.SkinColor.light}]}>
+        <View style={[styles.list,
+        {backgroundColor: userContext.SkinColor.light,
+        width:((page=="search")?('100%'):('80%'))}]}>
             <View style={styles.box}>
                 <IconButton type={(()=>{
-                    if(page=="showList")
+                    if(page=="showList" || page=="search")
                         return (item.completed ? stickerImages[userContext.CheckSticker] : iconImages.uncompleted);
                     else
                         return iconImages.remove;}
@@ -45,7 +47,6 @@ const UpDown =()=> {
 
 const styles = StyleSheet.create({
     list: {
-        width: '80%',
         alignSelf: 'center',
         marginBottom: 7,
         paddingLeft:10,
