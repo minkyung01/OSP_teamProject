@@ -8,7 +8,7 @@ const StickerBtn = ({type, num}) =>{
     const userContext = useContext(InfoContext);
     return(
         <Pressable onPress={()=>{
-            userContext.setSticker(num);
+            userContext._setSticker(num);
             }}>
         <Image style={{
             width: (userContext.CheckSticker==num?75:50),

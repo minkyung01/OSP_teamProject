@@ -11,7 +11,7 @@ const SortButton = ({text, method})=>{
     return(
         <Pressable style={iconStyle.container}
             onPress={()=>{
-                userContext.setSort(method);
+                userContext._setSort(method);
             }}>
 
             <CheckButton type={(userContext.Sort===method)?iconImages.completed:iconImages.uncompleted}/>

@@ -8,7 +8,7 @@ const ColorBtn = ({color}) => {
     const userContext = useContext(InfoContext);
     return(
         <Pressable onPress={()=>{
-            userContext.setSkinColor(color);
+            userContext._setSkinColor(color);
         }}>
             <SafeAreaView style={{
                 backgroundColor:color.dark,

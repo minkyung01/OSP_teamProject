@@ -7,22 +7,23 @@ import {Picker} from '@react-native-picker/picker';
 import BackArrow from './components/BackArrow';
 import TextButton from './components/TextButton';
 
-const AddList = ({navigation}) => {
+const EditContent = ({navigation,route}) => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
+    const item = route.params.item;
     const YEAR = new Date().getFullYear(); // Current year Constant
     const MONTH = new Date().getMonth()+10; // Current month Constant
     const DAY = new Date().getDate()+10; // Current day Constant
     const YEAR_str = new Date().getFullYear().toString(); // Current year Constant
     const MONTH_str = (new Date().getMonth()+10).toString(); // Current month Constant
     const DAY_str = (new Date().getDate()+10).toString(); // Current day Constant
-    const [todo,setTodo] = useState(''); // title of Schedule
-    const [year,setYear] = useState(new Date().getFullYear().toString()); // deadline => year
-    const [month,setMonth] = useState((new Date().getMonth()+10).toString()); // deadline => month
-    const [day,setDay] = useState((new Date().getDate()+10).toString()); // deadline => day
+    const [todo,setTodo] = useState(item.todo); // title of Schedule
+    const [year,setYear] = useState(parseInt(item.deadline/10000).toString()); // deadline => year
+    const [month,setMonth] = useState(parseInt((item.deadline-parseInt(item.deadline/10000)*10000)/100).toString()); // deadline => month
+    const [day,setDay] = useState(parseInt(item.deadline-parseInt(item.deadline/100)*100).toString()); // deadline => day
     const [now,setNow] = useState(new Date().getFullYear().toString()+(new Date().getMonth()+10).toString()+(new Date().getDate()+10).toString());
-    const [category, setCategory] = useState('assignment'); // category of Schedule
-    const [comment, setComment] = useState(''); // comment of Schedule
+    const [category, setCategory] = useState(item.category); // category of Schedule
+    const [comment, setComment] = useState(item.comment); // comment of Schedule
     class date extends Component{ // calculate date
         state={
             now: new Date()
@@ -58,9 +59,9 @@ const AddList = ({navigation}) => {
     }
     class DatePicker extends Component{
          state={
-             year: new Date().getFullYear().toString(),
-             month: new Date().getMonth().toString(),
-             day: new Date().getDate().toString(),
+             year: parseInt(item.deadline/10000).toString(),
+             month: parseInt((item.deadline-parseInt(item.deadline/10000)*10000)/100).toString(),
+             day: parseInt(item.deadline-parseInt(item.deadline/100)*100).toString(),
          };
          render(){
              return(
@@ -146,26 +147,16 @@ const AddList = ({navigation}) => {
              );
          }
      }
-    const _addList = () => {
-        const Date = new date().render();//현재 date string
+    const _EditContent = () => {
+        const Date = item.date;//현재 date string
         const Deadline = year+month+day;
         const newListObject = {
             [Date]: {date:Date, todo:todo, deadline:Deadline,category:category,comment:comment,completed: false},
         };
         (()=>{ //Check whether the deadline is ahead of the current date.
             if(parseInt(Deadline)>=parseInt(now)){
-                userContext._setLists({...userContext.Lists, ...newListObject});
-                alert('The schedule has been added successfully.');
-                setTodo('');
-                setYear(YEAR);
-                setMonth(MONTH);
-                setDay(DAY);
-                setCategory('assignment');
-                setComment('');
-                if(userContext.Attendance==0||userContext.LastAttendance<YEAR_str+MONTH_str+DAY_str){ // 오늘 처음 스케줄을 추가한 경우
-                    userContext._setAttendance(userContext.Attendance+1); // 출석일수 +=1
-                    userContext._setLastAttendance(YEAR_str+MONTH_str+DAY_str) // 오늘 날짜 -> 마지막 출석일로 저장
-                }
+                userContext._setLists({...Object.values(userContext.Lists).filter(LIST=>LIST.date != Date), ...newListObject});
+                alert('The schedule has been edited successfully.');
             }
             else{
                 alert("Invalid deadline. Please enter the proper schedule information.");
@@ -182,8 +173,8 @@ const AddList = ({navigation}) => {
                         <BackArrow navigation={navigation}/>
                     </SafeAreaView>
                     <SafeAreaView style={{alignItems:'center'}}>
-                        <Text style={styles.title}>Add new schedule to</Text>
-                        <Text style={styles.title}>TO-DO-LIST</Text>
+                        <Text style={styles.title}>Edit Information about</Text>
+                        <Text style={styles.title}>{todo}</Text>
                     </SafeAreaView>
                 </SafeAreaView>
 
@@ -218,7 +209,7 @@ const AddList = ({navigation}) => {
 
                 <SafeAreaView style={{flexDirection:'row'}}>
                     <Pressable style={{ flex: 1, backgroundColor: basicColor.itemBackground, paddingLeft: 40}}>
-                        <Text style={{fontSize:23,fontWeight:'700',paddingTop: 30,paddingLeft: 30,}}> Add </Text>
+                        <Text style={{fontSize:23,fontWeight:'700',paddingTop: 30,paddingLeft: 30,}}> Add</Text>
                         <Text style={{fontSize:23,fontWeight:'700',paddingTop: 0,paddingBottom: 40,paddingLeft: 30,}}>Photo</Text>
                     </Pressable>
                     <Pressable style={{ flex: 1, backgroundColor: basicColor.itemBackground, paddingRight: 60}}>
@@ -228,9 +219,9 @@ const AddList = ({navigation}) => {
                 </SafeAreaView>
 
                 <SafeAreaView style={{flexDirection:'row'}}>
-                    <Pressable onPress={_addList}>
-                        <Text style={{ backgroundColor: basicColor.itemBackground, fontSize:23,fontWeight:'700',paddingTop: 13,paddingBottom: 13, paddingLeft: '40%', paddingRight: '40%', margin: 20}}>
-                        add</Text>
+                    <Pressable onPress={_EditContent}>
+                        <Text style={{ backgroundColor: basicColor.itemBackground, fontSize:22,fontWeight:'700',paddingTop: 13,paddingBottom: 13, paddingLeft: '40%', paddingRight: '40%', margin: 20}}>
+                        edit</Text>
                     </Pressable>
                 </SafeAreaView>
 
@@ -270,4 +261,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default AddList;
+export default EditContent;

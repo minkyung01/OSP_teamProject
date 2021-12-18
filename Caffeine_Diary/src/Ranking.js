@@ -1,12 +1,13 @@
 import React,{useContext, useState,Component} from 'react';
-import {StatusBar, SafeAreaView, View,Text, StyleSheet, Image, ScrollView, Dimensions, Pressable} from 'react-native';
+import {Share,StatusBar, SafeAreaView, View,Text, StyleSheet, Image, ScrollView, Dimensions, Pressable} from 'react-native';
 import { basicColor } from './colors';
 import { textStyles } from './styles';
 import {levelImages, iconImages} from './images';
 import InfoContext from './components/InfoContext';
 import {Picker} from '@react-native-picker/picker';
+import NavBar from "./components/NavBar";
 
-const Ranking = () => {
+const Ranking = ({navigation}) => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
     const [total,setTotal] = useState(0); //total completion rate
@@ -34,11 +35,35 @@ const Ranking = () => {
 
     const DATE = new Date().getFullYear().toString()+(new Date().getMonth()+10).toString()+(new Date().getDate()+10).toString(); //오늘 날짜 YYYYMMDD
     const WeekAgo = new Date(year,month,day-DAY).getFullYear().toString()+(new Date(year,month,day-DAY).getMonth()+10).toString()+(new Date(year,month,day-DAY).getDate()+10).toString();// 일주일전 날짜 YYYYMMDD
+    const onShare = async () => {
+     try {
+        const Message = userContext.ID+" achieved "+Math.round(total/(count==0?1:count)*100)+"% "+userContext.Mode+".";
+        const explanation = "* Assignment: "+Math.round(one/(countOne==0?1:countOne)*100)+"% done!\n* Lecture: "+Math.round(two/(countTwo==0?1:countTwo)*100)+"% done!\n* Hobby: "+Math.round(three/(countThree==0?1:countThree)*100)+"% done!\n* Etc.: "+Math.round(four/(countFour==0?1:countFour)*100)+"% done!\n";
+        const last= "I did a lot, right?😉 Show yours, too!"
+        const result = await Share.share(
+            {
+                title: '😎Share my Completion Rate😎',
+                message: '🎉🎉🎉Please congratulate me!🎉🎉🎉\n\n'+Message+'\n'+explanation+'\n'+last,
+            }
+        );
 
+        if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+                console.log('activityType!');
+            } else {
+                console.log('Share!');
+            }
+        } else if (result.action === Share.dismissedAction) {
+                 console.log('dismissed');
+        }
+     } catch (error) {
+             alert(error.message);
+     }
+    };
     return(
+    <SafeAreaView style={{padding:0, height:'100%'}}>
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
-            <ScrollView width = {width-20} height = '100%'>
             
             <SafeAreaView style={{flexDirection:'row',alignItems:'center'}}>
                 <Image
@@ -57,7 +82,7 @@ const Ranking = () => {
                     <Text style={styles.text}>completion rate</Text>
                 </SafeAreaView>
             {(start)&&(
-            <Pressable style={{marginLeft:'auto',marginRight:10}} onPress={()=>alert('share')}>
+            <Pressable style={{marginLeft:'auto',marginRight:10}} onPress={onShare}>
                 <Image source={iconImages.share} style={{width:40,height:40}} />
             </Pressable>)}
             </SafeAreaView>
@@ -77,27 +102,27 @@ const Ranking = () => {
                         setTwo(0);
                         setThree(0);
                         setFour(0);
-                            setStart(true);
-                            setSelect(false);
-                            Object.values(newLists).map(listItem => (
-                            (()=>{
-                                if(listItem.completed){
-                                    setTotal(total=>total+1);
-                                    if(listItem.category==='assignment') setOne(one=>one+1);
-                                    else if(listItem.category==='lecture') setTwo(two=>two+1);
-                                    else if(listItem.category==='hobby') setThree(three=>three+1);
-                                    else setFour(four=>four+1);
-                                }
-                                if(listItem.category=='assignment') setCountOne(countOne=>countOne+1);
-                                else if(listItem.category=='lecture') setCountTwo(countTwo=>countTwo+1);
-                                else if(listItem.category=='hobby') setCountThree(countThree=>countThree+1);
-                                else setCountFour(countFour=>countFour+1);
-                                setCount(count=>count+1);
-                            })()
-                            ))}
-                        }}>
-                        <Text style={{alignSelf:'center',margin:16,color:basicColor.background,fontWeight:'700',fontSize:15}}>
-                        Show Result</Text>
+                        setStart(true);
+                        setSelect(false);
+                        Object.values(newLists).map(listItem => (
+                        (()=>{
+                            if(listItem.completed){
+                                setTotal(total=>total+1);
+                                if(listItem.category==='assignment') setOne(one=>one+1);
+                                else if(listItem.category==='lecture') setTwo(two=>two+1);
+                                else if(listItem.category==='hobby') setThree(three=>three+1);
+                                else setFour(four=>four+1);
+                            }
+                            if(listItem.category=='assignment') setCountOne(countOne=>countOne+1);
+                            else if(listItem.category=='lecture') setCountTwo(countTwo=>countTwo+1);
+                            else if(listItem.category=='hobby') setCountThree(countThree=>countThree+1);
+                            else setCountFour(countFour=>countFour+1);
+                            setCount(count=>count+1);
+                        })()
+                        ))}
+                    }}>
+                    <Text style={{alignSelf:'center',margin:16,color:basicColor.background,fontWeight:'700',fontSize:15}}>
+                       Show Result</Text>
                     </Pressable>
                     <Picker
                       style={[styles.dropdown,{backgroundColor:userContext.SkinColor.light}]}
@@ -110,13 +135,13 @@ const Ranking = () => {
                         (()=>{
                         switch(val){
                             case 'today':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(parseInt(LIST.date)/Math.pow(10,LIST.date.length-8)) == DATE));
+                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) >= DATE));
                                 break;
                             case 'this week':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(parseInt(LIST.date)/Math.pow(10,LIST.date.length-8)) > WeekAgo));
+                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) > WeekAgo));
                                 break;
                             case 'this month':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(parseInt(LIST.date)/Math.pow(10,LIST.date.length-6)) === parseInt(parseInt(DATE)/100)));
+                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline/100) >= parseInt(DATE/100)));
                                 break;
                             default:
                                 break;
@@ -130,7 +155,7 @@ const Ranking = () => {
                         <Picker.Item style={{fontSize:20}} label="This Month" value={'this month'} />
                     </Picker>
             </SafeAreaView>
-
+            <ScrollView style={{width:'100%', height: '56.4%'}}>
             <SafeAreaView style={{alignItems:'center',backgroundColor:userContext.SkinColor.dark,paddingTop:40,paddingBottom:40}}>
                 <SafeAreaView style={styles.content}>
                     {(start)&&(
@@ -138,7 +163,9 @@ const Ranking = () => {
                     {(!start)&&(select)&&(<Text style={styles.best}>Please press "Show Result" button.</Text>)}
                     {(!start)&&(!select)&&(<Text style={styles.best}>Please select an option.</Text>)}
                 </SafeAreaView>
+
             </SafeAreaView>
+
             {(start)&&(
             <SafeAreaView style={{flexDirection:'row', backgroundColor:userContext.SkinColor.dark,marginTop:10,paddingTop:10,paddingBottom:10}}>
                 <SafeAreaView style={styles.content}>
@@ -176,14 +203,18 @@ const Ranking = () => {
                 </SafeAreaView>
             </SafeAreaView>)}
             </ScrollView>
+
         </SafeAreaView>
+    <NavBar navigation={navigation} />
+    </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        alignItems:'center',
+        justifyContent:'space-between',
         padding: 10,
+        height:'89%'
     },
     content: {
         marginLeft: 20,

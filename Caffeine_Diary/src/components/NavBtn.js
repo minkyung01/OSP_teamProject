@@ -4,19 +4,12 @@ import {Pressable, Text, SafeAreaView, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {basicColor} from '../colors';
 
-const NavBtn = ({text}) =>{
+const NavBtn = ({text, onPressOut}) =>{
     const [isTouch,SetIsTouch] =useState(false);
     return(
         <SafeAreaView style={styles.basic}>
         <Pressable
-            onPress={()=>{
-                if(isTouch == true) { //눌린 상태
-                    SetIsTouch(false);
-                }
-                else if(isTouch == false) {
-                    SetIsTouch(true);
-                }
-            }}
+            onPressOut={onPressOut}
         >
             <Text style={{
                 fontSize:13,

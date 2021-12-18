@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Caffeine_Diary",
+    "name": "Caffeine Diary",
     "slug": "Caffeine_Diary",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/coffee.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
