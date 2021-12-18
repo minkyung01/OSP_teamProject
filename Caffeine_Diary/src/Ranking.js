@@ -1,5 +1,5 @@
 import React,{useContext, useState,Component} from 'react';
-import {StatusBar, SafeAreaView, View,Text, StyleSheet, Image, ScrollView, Dimensions, Pressable} from 'react-native';
+import {Share,StatusBar, SafeAreaView, View,Text, StyleSheet, Image, ScrollView, Dimensions, Pressable} from 'react-native';
 import { basicColor } from './colors';
 import { textStyles } from './styles';
 import {levelImages, iconImages} from './images';
@@ -35,7 +35,31 @@ const Ranking = ({navigation}) => {
 
     const DATE = new Date().getFullYear().toString()+(new Date().getMonth()+10).toString()+(new Date().getDate()+10).toString(); //오늘 날짜 YYYYMMDD
     const WeekAgo = new Date(year,month,day-DAY).getFullYear().toString()+(new Date(year,month,day-DAY).getMonth()+10).toString()+(new Date(year,month,day-DAY).getDate()+10).toString();// 일주일전 날짜 YYYYMMDD
+    const onShare = async () => {
+     try {
+        const Message = userContext.ID+" achieved "+Math.round(total/(count==0?1:count)*100)+"% "+userContext.Mode+".";
+        const explanation = "* Assignment: "+Math.round(one/(countOne==0?1:countOne)*100)+"% done!\n* Lecture: "+Math.round(two/(countTwo==0?1:countTwo)*100)+"% done!\n* Hobby: "+Math.round(three/(countThree==0?1:countThree)*100)+"% done!\n* Etc.: "+Math.round(four/(countFour==0?1:countFour)*100)+"% done!\n";
+        const last= "I did a lot, right?😉 Show yours, too!"
+        const result = await Share.share(
+            {
+                title: 'App link',
+                message: '🎉🎉🎉Please congratulate me!🎉🎉🎉\n\n'+Message+'\n'+explanation+'\n'+last,
+            }
+        );
 
+        if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+                console.log('activityType!');
+            } else {
+                console.log('Share!');
+            }
+        } else if (result.action === Share.dismissedAction) {
+                 console.log('dismissed');
+        }
+     } catch (error) {
+             alert(error.message);
+     }
+    };
     return(
     <SafeAreaView style={{padding:0}}>
         <SafeAreaView style={styles.container}>
@@ -58,7 +82,7 @@ const Ranking = ({navigation}) => {
                     <Text style={styles.text}>completion rate</Text>
                 </SafeAreaView>
             {(start)&&(
-            <Pressable style={{marginLeft:'auto',marginRight:10}} onPress={()=>alert('share')}>
+            <Pressable style={{marginLeft:'auto',marginRight:10}} onPress={onShare}>
                 <Image source={iconImages.share} style={{width:40,height:40}} />
             </Pressable>)}
             </SafeAreaView>

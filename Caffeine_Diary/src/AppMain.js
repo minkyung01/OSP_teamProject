@@ -45,7 +45,7 @@ const AppMain = ({navigation})=> {
         </View>
         <Category title={item}/>
 
-        <ScrollView style={{height:'54%'}}>
+        <ScrollView style={{height:'52.5%'}}>
                 {(item==="All Schedule")&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).map(listItem => (
                     <List key={listItem.date}
@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     basic: {
         backgroundColor: basicColor.background,
         paddingTop:'10%',
+        height:"100%"
     },
     container: {
         paddingTop:20,
