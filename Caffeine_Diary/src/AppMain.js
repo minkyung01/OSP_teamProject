@@ -17,8 +17,8 @@ const AppMain = ({navigation})=> {
     const DATE = new Date().getFullYear().toString()+(new Date().getMonth()+10).toString()+(new Date().getDate()+10).toString(); //오늘 날짜 YYYYMMDD
     return (
     <SafeAreaView style={styles.basic}>
+        <SafeAreaView style={{height:'89%'}}>
         <Title />
-        <View>
         <View style={[{flexDirection: 'row',alignItems:'center',justifyContent:'space-between',marginBottom:10}]}>
         <SafeAreaView style={[styles.button,{backgroundColor:userContext.SkinColor.light}]}>
             <Picker
@@ -44,8 +44,7 @@ const AppMain = ({navigation})=> {
             </View>
         </View>
         <Category title={item}/>
-
-        <ScrollView style={{height:'52.5%'}}>
+        <ScrollView>
                 {(item==="All Schedule")&&(
                 Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).map(listItem => (
                     <List key={listItem.date}
@@ -127,7 +126,7 @@ const AppMain = ({navigation})=> {
                        }} page={"showList"} navigation={navigation}/>
                 ))}
         </ScrollView>
-        </View>
+        </SafeAreaView>
         <NavBar navigation={navigation}/>
         </SafeAreaView>
     );

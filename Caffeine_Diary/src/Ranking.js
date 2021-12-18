@@ -42,7 +42,7 @@ const Ranking = ({navigation}) => {
         const last= "I did a lot, right?😉 Show yours, too!"
         const result = await Share.share(
             {
-                title: 'App link',
+                title: '😎Share my Completion Rate😎',
                 message: '🎉🎉🎉Please congratulate me!🎉🎉🎉\n\n'+Message+'\n'+explanation+'\n'+last,
             }
         );
@@ -61,7 +61,7 @@ const Ranking = ({navigation}) => {
      }
     };
     return(
-    <SafeAreaView style={{padding:0}}>
+    <SafeAreaView style={{padding:0, height:'100%'}}>
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
             
@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent:'space-between',
         padding: 10,
+        height:'89%'
     },
     content: {
         marginLeft: 20,

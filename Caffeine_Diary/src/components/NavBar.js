@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     nav: {
         flexDirection:'row',
         width:'100%',
-        height:80,
+        height:"11%",
         justifyContent:'center',
         alignItems:'center',
     },

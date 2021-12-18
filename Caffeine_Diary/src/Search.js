@@ -16,7 +16,7 @@ const Search = ({navigation}) => {
     const [count, setCount] = useState(0);
     const [click, setClick] = useState(0);
     return(
-    <SafeAreaView>
+    <SafeAreaView style={{height:'100%'}}>
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>
             <ScrollView width = {width-20} height = '80%'>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems:'center',
         padding: 20,
-        height:'89.2%',
+        height:'89%',
     },
     content: {
         margin: 10,
