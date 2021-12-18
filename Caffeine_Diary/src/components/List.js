@@ -24,7 +24,7 @@ const List = ({ item, action,page,navigation }) => {
             </View>
             <View style={{flexDirection:'row',justifyContent:'space-between', width:'80%'}}>
             <Pressable style={{alignSelf: 'center',marginBottom:2}}
-            onPress={()=>{navigation.push('ListInfo',{date:item.date})}}>
+            onPress={()=>{navigation.push('ListInfo',{item:item})}}>
             <Text style={[styles.textList,
             {textDecorationLine: (item.completed? 'line-through' : 'none')}]}>
                 {item.todo}
