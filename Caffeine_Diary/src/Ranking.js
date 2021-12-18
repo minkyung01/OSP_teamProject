@@ -78,27 +78,27 @@ const Ranking = ({navigation}) => {
                         setTwo(0);
                         setThree(0);
                         setFour(0);
-                            setStart(true);
-                            setSelect(false);
-                            Object.values(newLists).map(listItem => (
-                            (()=>{
-                                if(listItem.completed){
-                                    setTotal(total=>total+1);
-                                    if(listItem.category==='assignment') setOne(one=>one+1);
-                                    else if(listItem.category==='lecture') setTwo(two=>two+1);
-                                    else if(listItem.category==='hobby') setThree(three=>three+1);
-                                    else setFour(four=>four+1);
-                                }
-                                if(listItem.category=='assignment') setCountOne(countOne=>countOne+1);
-                                else if(listItem.category=='lecture') setCountTwo(countTwo=>countTwo+1);
-                                else if(listItem.category=='hobby') setCountThree(countThree=>countThree+1);
-                                else setCountFour(countFour=>countFour+1);
-                                setCount(count=>count+1);
-                            })()
-                            ))}
-                        }}>
-                        <Text style={{alignSelf:'center',margin:16,color:basicColor.background,fontWeight:'700',fontSize:15}}>
-                        Show Result</Text>
+                        setStart(true);
+                        setSelect(false);
+                        Object.values(newLists).map(listItem => (
+                        (()=>{
+                            if(listItem.completed){
+                                setTotal(total=>total+1);
+                                if(listItem.category==='assignment') setOne(one=>one+1);
+                                else if(listItem.category==='lecture') setTwo(two=>two+1);
+                                else if(listItem.category==='hobby') setThree(three=>three+1);
+                                else setFour(four=>four+1);
+                            }
+                            if(listItem.category=='assignment') setCountOne(countOne=>countOne+1);
+                            else if(listItem.category=='lecture') setCountTwo(countTwo=>countTwo+1);
+                            else if(listItem.category=='hobby') setCountThree(countThree=>countThree+1);
+                            else setCountFour(countFour=>countFour+1);
+                            setCount(count=>count+1);
+                        })()
+                        ))}
+                    }}>
+                    <Text style={{alignSelf:'center',margin:16,color:basicColor.background,fontWeight:'700',fontSize:15}}>
+                       Show Result</Text>
                     </Pressable>
                     <Picker
                       style={[styles.dropdown,{backgroundColor:userContext.SkinColor.light}]}
@@ -111,13 +111,13 @@ const Ranking = ({navigation}) => {
                         (()=>{
                         switch(val){
                             case 'today':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(parseInt(LIST.date)/Math.pow(10,LIST.date.length-8)) == DATE));
+                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) >= DATE));
                                 break;
                             case 'this week':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(parseInt(LIST.date)/Math.pow(10,LIST.date.length-8)) > WeekAgo));
+                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) > WeekAgo));
                                 break;
                             case 'this month':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(parseInt(LIST.date)/Math.pow(10,LIST.date.length-6)) === parseInt(parseInt(DATE)/100)));
+                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline/100) >= parseInt(DATE/100)));
                                 break;
                             default:
                                 break;

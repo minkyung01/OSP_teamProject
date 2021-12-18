@@ -21,7 +21,8 @@ export const Header = () => {
 };
 export const Contents = ({navigation}) => {
     const userContext = useContext(InfoContext);
-    const [item,setItem] = useState('today');
+    const [item,setItem] = useState("Today's Schedule");
+    const DATE = new Date().getFullYear().toString()+(new Date().getMonth()+10).toString()+(new Date().getDate()+10).toString(); //오늘 날짜 YYYYMMDD
     return (
     <View>
         <View style={[{flexDirection: 'row',alignItems:'center',justifyContent:'space-between',marginBottom:10}]}>
@@ -32,13 +33,14 @@ export const Contents = ({navigation}) => {
                 onValueChange={(val,idx)=> {
                 setItem(val);}
              }>
-             <Picker.Item style={styles.buttonText} label="Today" value={"today"} />
-             <Picker.Item style={styles.buttonText} label="Assignment" value={"assignment"} />
-             <Picker.Item style={styles.buttonText} label="Lecture" value={"lecture"} />
-             <Picker.Item style={styles.buttonText} label="Hobby" value={"hobby"} />
-             <Picker.Item style={styles.buttonText} label="etc." value={"etc."} />
-             <Picker.Item style={styles.buttonText} label="Completed" value={"completed"} />
-             <Picker.Item style={styles.buttonText} label="Uncompleted" value={"uncompleted"} />
+             <Picker.Item style={styles.buttonText} label="All" value={"All Schedule"} />
+             <Picker.Item style={styles.buttonText} label="Today" value={"Today's Schedule"} />
+             <Picker.Item style={styles.buttonText} label="Assignment" value={"Today's Assignment"} />
+             <Picker.Item style={styles.buttonText} label="Lecture" value={"Today's Lecture"} />
+             <Picker.Item style={styles.buttonText} label="Hobby" value={"Today's Hobby"} />
+             <Picker.Item style={styles.buttonText} label="etc." value={"Today's etc."} />
+             <Picker.Item style={styles.buttonText} label="Completed" value={"Completed"} />
+             <Picker.Item style={styles.buttonText} label="Uncompleted" value={"Uncompleted"} />
            </Picker>
         </SafeAreaView>
 
@@ -47,10 +49,11 @@ export const Contents = ({navigation}) => {
                 <IconButton type={iconImages.edit} page={"EditList"} onPressOut={()=> navigation.navigate('Del_Add_List')}/>
             </View>
         </View>
-        <Category title="Today's Schedule" />
-        <ScrollView style={{height:'52.5%'}}>
-                {(item==='today')&&(
-                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).map(listItem => (
+        <Category title={item}/>
+
+        <ScrollView style={{height:'54%'}}>
+                {(item==="All Schedule")&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
@@ -58,9 +61,9 @@ export const Contents = ({navigation}) => {
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
-                )))}
-                {(item==='assignment')&&(
-                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='assignment').map(listItem => (
+                ))}
+                {(item==="Today's Schedule")&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>parseInt(LIST.deadline) >= DATE).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
@@ -68,9 +71,9 @@ export const Contents = ({navigation}) => {
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
-                )))}
-                {(item==='hobby')&&(
-                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='hobby').map(listItem => (
+                ))}
+                {(item==="Today's Assignment")&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>(LIST.category==='assignment')&&(parseInt(LIST.deadline) >= DATE)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
@@ -78,9 +81,9 @@ export const Contents = ({navigation}) => {
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
-                )))}
-                {(item==='lecture')&&(
-                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='lecture').map(listItem => (
+                ))}
+                {(item==="Today's Hobby")&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>(LIST.category==='hobby')&&(parseInt(LIST.deadline) >= DATE)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
@@ -88,9 +91,9 @@ export const Contents = ({navigation}) => {
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
-                )))}
-                {(item==='etc.')&&(
-                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.category==='etc.').map(listItem => (
+                ))}
+                {(item==="Today's Lecture")&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>(LIST.category==='lecture')&&(parseInt(LIST.deadline) >= DATE)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
@@ -98,9 +101,9 @@ export const Contents = ({navigation}) => {
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
-                )))}
-                {(item==='completed')&&(
-                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.completed===true).map(listItem => (
+                ))}
+                {(item==="Today's etc.")&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>(LIST.category==='etc.')&&(parseInt(LIST.deadline) >= DATE)).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
@@ -108,9 +111,9 @@ export const Contents = ({navigation}) => {
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
-                )))}
-                {(item==='uncompleted')&&(
-                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.date<b.date?1:-1):((a,b)=>a.deadline<b.deadline?1:-1)).filter(LIST=>LIST.completed===false).map(listItem => (
+                ))}
+                {(item==='Completed')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>LIST.completed===true).map(listItem => (
                     <List key={listItem.date}
                           item={listItem}
                           action={(date)=>{
@@ -118,7 +121,17 @@ export const Contents = ({navigation}) => {
                             const currentLists = Object.assign({}, userContext.Lists);
                             userContext._setLists(currentLists);
                        }} page={"showList"} navigation={navigation}/>
-                )))}
+                ))}
+                {(item==='Uncompleted')&&(
+                Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1))).filter(LIST=>LIST.completed===false).map(listItem => (
+                    <List key={listItem.date}
+                          item={listItem}
+                          action={(date)=>{
+                            listItem.completed = !listItem.completed;
+                            const currentLists = Object.assign({}, userContext.Lists);
+                            userContext._setLists(currentLists);
+                       }} page={"showList"} navigation={navigation}/>
+                ))}
         </ScrollView>
         </View>
     );

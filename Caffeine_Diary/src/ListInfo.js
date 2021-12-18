@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 const ListInfo = ({navigation,route}) => {
     const width = Dimensions.get('window').width;
     const userContext = useContext(InfoContext);
-    const date = route.params.date
+    const date = route.params.date;
     return(
         <ScrollView>
             <StatusBar barStyle="light-content" style={textStyles.statusbar}/>

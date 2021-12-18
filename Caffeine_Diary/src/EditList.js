@@ -22,7 +22,7 @@ const EditList = ({navigation}) => {
                 <TextButton text="delete all" />
             </SafeAreaView>
             <Category title="Edit List" />
-            {Object.values(userContext.Lists).reverse().map(listItem => (
+            {Object.values(userContext.Lists).sort((userContext.Sort=='closest')?((a,b)=>a.deadline<b.deadline?-1:1):((a,b)=>a.date<b.date?1:-1)).map(listItem => (
                 <List key={listItem.date} item={listItem}
                 action={()=>{ // delete to-do-list
                     userContext._setLists(Object.values(userContext.Lists).filter(LIST=>LIST.date !== listItem.date));
