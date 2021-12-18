@@ -1,5 +1,4 @@
 
-
 //Ranking.js에 이용
 import React from 'react';
 import { Share, View, Button } from 'react-native';
@@ -43,7 +42,7 @@ const URLShareButton = styled.Share`
 	}
 `;
 
-function sharing() {
+function App() {
     
       const currentUrl = window.location.href;
       return (
@@ -65,5 +64,4 @@ function sharing() {
       );
   }
 
-export default sharing;
-
+export default App;
