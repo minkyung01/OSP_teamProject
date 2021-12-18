@@ -29,7 +29,7 @@ const Search = ({navigation}) => {
             }}
             onPressOut={()=>{
                 (()=>{
-                    if((search !='')&&(click==1)){
+                    if((search !='')&&(click==1)&&(userContext.Lists)){
                         Object.values(userContext.Lists).map(listItem => (
                         (()=>{
                             if(listItem.todo.includes(search)){
