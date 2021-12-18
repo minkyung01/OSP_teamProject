@@ -196,7 +196,7 @@ const EditContent = ({navigation,route}) => {
                     <CategoryPicker />
                 </SafeAreaView>
 
-                <SafeAreaView style={{flexDirection:'row', backgroundColor: basicColor.itemBackground, alignItems:'center',paddingTop:40}}>
+                <SafeAreaView style={{flexDirection:'row', backgroundColor: basicColor.itemBackground, alignItems:'center',paddingTop:40,paddingBottom:80}}>
                     <Text style={styles.greyBox}>Comment</Text>
                     <SafeAreaView style={styles.comment}>
                         <TextInput style={{backgroundColor: basicColor.background, width: '90%', fontSize:20, fontWeight:'400',padding: 5}}
@@ -205,17 +205,6 @@ const EditContent = ({navigation,route}) => {
                         value={comment}>
                         </TextInput>
                     </SafeAreaView>
-                </SafeAreaView>
-
-                <SafeAreaView style={{flexDirection:'row'}}>
-                    <Pressable style={{ flex: 1, backgroundColor: basicColor.itemBackground, paddingLeft: 40}}>
-                        <Text style={{fontSize:23,fontWeight:'700',paddingTop: 30,paddingLeft: 30,}}> Add</Text>
-                        <Text style={{fontSize:23,fontWeight:'700',paddingTop: 0,paddingBottom: 40,paddingLeft: 30,}}>Photo</Text>
-                    </Pressable>
-                    <Pressable style={{ flex: 1, backgroundColor: basicColor.itemBackground, paddingRight: 60}}>
-                        <Text style={{fontSize:23,fontWeight:'700',paddingTop: 30,paddingLeft: 40,}}>    Add</Text>
-                        <Text style={{fontSize:23,fontWeight:'700',paddingTop: 0,paddingBottom: 40,paddingLeft: 40,}}>Location</Text>
-                    </Pressable>
                 </SafeAreaView>
 
                 <SafeAreaView style={{flexDirection:'row'}}>
