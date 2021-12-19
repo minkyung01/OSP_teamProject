@@ -134,13 +134,13 @@ const Ranking = ({navigation}) => {
                         (()=>{
                         switch(val){
                             case 'today':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) >= DATE));
+                                setNewLists((userContext.Lists)?(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) >= DATE)):(''));
                                 break;
                             case 'this week':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) > WeekAgo));
+                                setNewLists((userContext.Lists)?(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) > WeekAgo)):(''));
                                 break;
                             case 'this month':
-                                setNewLists(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline/100) >= parseInt(DATE/100)));
+                                setNewLists((userContext.Lists)?(Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline/100) >= parseInt(DATE/100))):(''));
                                 break;
                             default:
                                 break;
