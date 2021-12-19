@@ -157,9 +157,9 @@ const AddList = ({navigation}) => {
                 userContext._setLists({...userContext.Lists, ...newListObject});
                 alert('The schedule has been added successfully.');
                 setTodo('');
-                setYear(YEAR);
-                setMonth(MONTH);
-                setDay(DAY);
+                setYear(YEAR.toString());
+                setMonth(MONTH.toString());
+                setDay(DAY.toString());
                 setCategory('assignment');
                 setComment('');
                 if(userContext.Attendance==0||userContext.LastAttendance<YEAR_str+MONTH_str+DAY_str){ // 오늘 처음 스케줄을 추가한 경우

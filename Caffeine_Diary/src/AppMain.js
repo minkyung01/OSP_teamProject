@@ -22,7 +22,7 @@ const AppMain = ({navigation})=> {
         <View style={[{flexDirection: 'row',alignItems:'center',justifyContent:'space-between',marginBottom:10}]}>
         <SafeAreaView style={[styles.button,{backgroundColor:userContext.SkinColor.light}]}>
             <Picker
-                style={{width:160}}
+                style={{width:140}}
                 selectedValue={item}
                 onValueChange={(val,idx)=> {
                 setItem(val);}
@@ -39,7 +39,7 @@ const AppMain = ({navigation})=> {
         </SafeAreaView>
 
             <View style={styles.edit}>
-                <SelectBtn/>
+                <SelectBtn item={item}/>
                 <IconButton type={iconImages.edit} page={"EditList"} onPressOut={()=> navigation.navigate('Del_Add_List')}/>
             </View>
         </View>
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
     },
     button: {
-        width: 160,
+        width: 140,
         height: 40,
         borderRadius: 10,
         marginLeft: 40,

@@ -6,29 +6,201 @@ import InfoContext from './InfoContext';
 import IconButton from './IconButton';
 import { stickerImages } from '../images';
 
-const SelectBtn = () =>{
-    const [isTouch,SetIsTouch] =useState(false);
+const SelectBtn = ({item}) =>{
+    const [mode,setMode] =useState('Select All');
+    const [changeLists,setChangeLists] = useState('');
+    const userContext = useContext(InfoContext);
+    const DATE = new Date().getFullYear().toString()+(new Date().getMonth()+10).toString()+(new Date().getDate()+10).toString(); //오늘 날짜 YYYYMMDD
     return(
         <SafeAreaView style={styles.button}>
         <Pressable
-            onPress={()=>{
-                if(isTouch) { //select all 버튼 눌린 상태에서 또 눌렀을 때
-                    //전체 체크 해제
-                    SetIsTouch(false);
-                }
-                else {
-                    //전체 체크
-                    //checkAll();
-                    SetIsTouch(true);
-                }
+            onPressOut={()=>{
+            (()=>{
+                if(item=="All Schedule"){
+                    Object.values(userContext.Lists).map(listItems=>{
+                    (()=>{
+                       if(mode=='Select All'){
+                            if(!listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Deselect All');
+                       }
+                       else{
+                            if(listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Select All');
+                       }
+
+                    })()
+                    })}
+                else if(item=="Today's Schedule"){
+                   Object.values(userContext.Lists).filter(LIST=>parseInt(LIST.deadline) >= DATE).map(listItems=>{
+                    (()=>{
+                       if(mode=='Select All'){
+                            if(!listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Deselect All');
+                       }
+                       else{
+                            if(listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Select All');
+                       }
+
+                    })()
+                    })}
+                else if(item=="Today's Assignment"){
+                   Object.values(userContext.Lists).filter(LIST=>LIST.category=='assignment').map(listItems=>{
+                    (()=>{
+                       if(mode=='Select All'){
+                            if(!listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Deselect All');
+                       }
+                       else{
+                            if(listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Select All');
+                       }
+
+                    })()
+                    })}
+                else if(item=="Today's Lecture"){
+                   Object.values(userContext.Lists).filter(LIST=>LIST.category=='lecture').map(listItems=>{
+                    (()=>{
+                       if(mode=='Select All'){
+                            if(!listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Deselect All');
+                       }
+                       else{
+                            if(listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Select All');
+                       }
+
+                    })()
+                    })}
+                else if(item=="Today's Hobby"){
+                   Object.values(userContext.Lists).filter(LIST=>LIST.category=='hobby').map(listItems=>{
+                    (()=>{
+                       if(mode=='Select All'){
+                            if(!listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Deselect All');
+                       }
+                       else{
+                            if(listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Select All');
+                       }
+
+                    })()
+                    })}
+                else if(item=="Today's etc."){
+                   Object.values(userContext.Lists).filter(LIST=>LIST.category=='etc.').map(listItems=>{
+                    (()=>{
+                       if(mode=='Select All'){
+                            if(!listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Deselect All');
+                       }
+                       else{
+                            if(listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Select All');
+                       }
+
+                    })()
+                    })}
+                else if(item=="Completed"){
+                   Object.values(userContext.Lists).filter(LIST=>LIST.completed==true).map(listItems=>{
+                    (()=>{
+                       if(mode=='Select All'){
+                            if(!listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Deselect All');
+                       }
+                       else{
+                            if(listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Select All');
+                       }
+
+                    })()
+                    })}
+                else if(item=="Uncompleted"){
+                   Object.values(userContext.Lists).filter(LIST=>LIST.completed==false).map(listItems=>{
+                    (()=>{
+                       if(mode=='Select All'){
+                            if(!listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Deselect All');
+                       }
+                       else{
+                            if(listItems.completed){
+                                listItems.completed=!listItems.completed;
+                                const currentLists = Object.assign({}, userContext.Lists);
+                                userContext._setLists(currentLists);
+                            }
+                            setMode('Select All');
+                       }
+
+                    })()
+                    })}
+            })()
             }}
         >
             <Text 
-                style={{color:(isTouch? basicColor.pointText : basicColor.text),
-                        fontWeight: (isTouch? '700' : '500'),
+                style={{color:basicColor.pointText,
+                        fontWeight: '700',
                         fontSize:18,
                         }}>
-                select all
+                {mode}
                 </Text>
         </Pressable>
         </SafeAreaView>
