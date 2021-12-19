@@ -16,6 +16,7 @@ const SelectBtn = ({item}) =>{
         <Pressable
             onPressOut={()=>{
             (()=>{
+            if(userContext.Lists){
                 if(item=="All Schedule"){
                     Object.values(userContext.Lists).map(listItems=>{
                     (()=>{
@@ -192,6 +193,7 @@ const SelectBtn = ({item}) =>{
 
                     })()
                     })}
+                    }
             })()
             }}
         >
