@@ -5,7 +5,7 @@ Team Member | Role
 ------------- | ---------------
 정민정 | enter/edit/remove 기능 구현, show only the complete/incomplete/category 기능 구현, sort 기능 구현, select/deselect/delete all 기능 구현, search 항목 개수 표시 기능 구현, show/visualize the completion rate per category/day/week/month 기능 구현, share 내용 구현, Special 기능 구현(사용자 선택 테마색상/체크 스티커 적용, 출석일수에 따른 레벨 시스템 구현, Level 설명 화면 구현, 로그인/회원가입/자동 로그인 기능 구현), JSON 이용한 사용자 정보 저장 구현, Navigation 이용한 페이지 연결 구현
 이민경 | view todo list 화면 레이아웃 구현, 내비게이션 바 구현, 전체 선택 기능 구현
-곽민소 | LogIn, LogOut 화면 레이아웃 구현
+곽민소 | LogIn, LogOut 화면 레이아웃 구현, share 기능 구현
 김명지 | Ranking, AddList, ListInfo, Search 화면 레이아웃 구현,  search 기능 구현
 ## ☕ Special Feature
 >1. 오늘의 할 일을 작성하면, 출석일수가 1일 늘어난다.
@@ -23,4 +23,8 @@ Purpose | Library
 사용자 정보 저장 | @react-native-async-storage/async-storage, @expo-app-loading 
 
 ## ☕ Introduction video
+https://user-images.githubusercontent.com/52921222/155513241-1c6a512f-7c60-4a85-bf28-80029f4db71f.mp4
+
+
+
 
